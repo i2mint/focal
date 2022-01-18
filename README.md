@@ -1,6 +1,6 @@
 
 # focal
-Data Object Layers for local files.
+Data Access Objects for local files.
 
 # Examples
 
