@@ -7,7 +7,7 @@ from itertools import takewhile
 from on.errors import NoSuchKeyError
 
 from on.base import KeyValidationABC
-from on.mixins import FilteredKeysMixin, IterBasedSizedMixin
+from dol.mixins import FilteredKeysMixin, IterBasedSizedMixin
 from focal.parse_format import match_re_for_fstring
 from on.base import KvReader
 

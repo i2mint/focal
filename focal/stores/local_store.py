@@ -10,7 +10,7 @@ from focal.persisters.local_files import (
     DirReader,
     ensure_slash_suffix,
 )
-from on.mixins import SimpleJsonMixin
+from dol.mixins import SimpleJsonMixin
 
 
 class PrefixRelativization(PrefixRelativizationMixin):
