@@ -1,10 +1,5 @@
-from focal.filesys import FileCollection, FileBytesReader
+"""Data Object Layers for local files"""
 
-from focal.stores.local_store import (
-    QuickBinaryStore,
-    QuickTextStore,
-    QuickJsonStore,
-    QuickPickleStore,
-    QuickStore,
-    DirStore
-)
+from dol import *
+
+from focal.extension_store import multi_extension_wrap
