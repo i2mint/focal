@@ -5,6 +5,7 @@ import pandas as pd
 
 test_df = pd.DataFrame({'A': [0, 1], 'B': [1, 6]})
 test_json = {'a': 1, 'b': [1, 2, 3], 'c': 'string'}
+test_string = 'test_string'
 test_array = np.random.random((10, 10))
 
 df_comparison = lambda obj, retrieved_df: obj.equals(retrieved_df)
@@ -15,9 +16,8 @@ test_tuples = ((test_df, '.csv', df_comparison),
                (test_df, '.xlsx', df_comparison),
                (test_df, '.p', df_comparison),
                (test_json, '.json', basic_comparison),
-               ('test_string', '.txt', basic_comparison),
+               (test_string, '.txt', basic_comparison),
                (test_array, '.npy', array_comparison))
-
 
 @pytest.mark.parametrize(
     'object_to_test, extension_to_test, comparison_func',

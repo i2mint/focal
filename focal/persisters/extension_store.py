@@ -9,6 +9,8 @@ import pandas as pd
 from functools import partial
 
 
+#-------------------------------------------------Object to bytes-------------------------------------------------------
+
 def df_to_csv_bytes(df: pd.DataFrame, format='utf-8', index=False):
     return bytes(df.to_csv(index=index), format)
 
@@ -28,14 +30,16 @@ def obj_to_pickle_bytes(obj):
     return pickle.dumps(obj)
 
 
-def json_to_bytes(json, format='utf-8'):
-    return bytes(json.dumps(json), format)
+def jdict_to_bytes(jdict, format='utf-8'):
+    return bytes(json.dumps(jdict), format)
 
 
 def array_to_bytes(arr: np.ndarray) -> bytes:
     np_bytes = BytesIO()
     np.save(np_bytes, arr)
     return np_bytes.getvalue()
+
+#-------------------------------------------------Bytes to Object-------------------------------------------------------
 
 
 def csv_bytes_to_df(b: bytes):
@@ -63,49 +67,37 @@ def bytes_to_array(b: bytes) -> np.ndarray:
     return np.load(np_bytes)
 
 
-def preset(k, v):
-    if k.endswith('.csv'):
-        return df_to_csv_bytes(v)
-
-    if k.endswith('.xlsx'):
-        return df_to_xlsx_bytes(v)
-
-    if k.endswith('.p'):
-        return obj_to_pickle_bytes(v)
-
-    # def json_to_bytes(json, format='utf-8'):
-    #     return bytes(json.dumps(json), format)
-
-    if k.endswith('.json'):
-        return bytes(json.dumps(v), 'utf-8')
-        #return json_to_bytes(v)
-
-    if k.endswith('.txt'):
-        return string_to_bytes(v)
-
-    if k.endswith('.npy'):
-        return array_to_bytes(v)
+extensions_preset_postget = {'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
+                             'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
+                             'p': {'preset': obj_to_pickle_bytes, 'postget': pickle_bytes_to_obj},
+                             'json': {'preset': jdict_to_bytes, 'postget': json_bytes_to_json},
+                             'txt': {'preset': string_to_bytes, 'postget': text_byte_to_string},
+                             'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}}
 
 
-def postget(k, v):
-    if k.endswith('.csv'):
-        return csv_bytes_to_df(v)
+def get_extension(k):
+    return k.split('.')[-1]
 
-    if k.endswith('.xlsx'):
-        return excel_bytes_to_df(v)
+def make_conversion_for_obj(k, v, extensions_preset_postget, func_type='preset'):
+    extension = get_extension(k)
+    conv_func = extensions_preset_postget[extension][func_type]
+    return conv_func(v)
 
-    if k.endswith('.p'):
-        return pickle_bytes_to_obj(v)
+postget = partial(make_conversion_for_obj, extensions_preset_postget=extensions_preset_postget, func_type='postget')
+preset = partial(make_conversion_for_obj, extensions_preset_postget=extensions_preset_postget, func_type='preset')
 
-    if k.endswith('.json'):
-        return json_bytes_to_json(v)
-
-    if k.endswith('.txt'):
-        return text_byte_to_string(v)
-
-    if k.endswith('.npy'):
-        return bytes_to_array(v)
-
+# def preset(k, v):
+#     extension = get_extension(k)
+#     obj_to_byte = extensions_preset_postget[extension]['preset']
+#
+#     return obj_to_byte(v)
+#
+#
+# def postget(k, v):
+#     extension = get_extension(k)
+#     byte_to_obj = extensions_preset_postget[extension]['postget']
+#
+#     return byte_to_obj(v)
 
 multi_extension_wrap = partial(wrap_kvs, postget=postget, preset=preset)
 MultiFileStore = multi_extension_wrap(LocalBinaryStore)
