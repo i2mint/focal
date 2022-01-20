@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>focal.extension_store &mdash; focal 0.1.0 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>focal.extension_store &mdash; focal 0.1.1 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -76,7 +76,50 @@
   <section id="module-focal.extension_store">
 <span id="focal-extension-store"></span><h1>focal.extension_store<a class="headerlink" href="#module-focal.extension_store" title="Permalink to this headline">¶</a></h1>
 <p>Stores that are extension-aware when reading and writing.</p>
-<p>TODO: A few doctest examples</p>
+<p>Make a temporary folder</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Check that it is empty for now</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span>  <span class="n">listdir</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">listdir</span><span class="p">(</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<p>Instantiate a store, persisting in our local temporary folder</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">MultiFileStore</span><span class="p">(</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here are a few object to save into our folder:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_jdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_string</span> <span class="o">=</span> <span class="s1">&#39;test_string&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now we can save each of these in a relevant format:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_df.csv&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_df</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_jdict.json&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_jdict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_string.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_string</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_array.npy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_array</span>
+</pre></div>
+</div>
+<p>Check that our folder contains those files</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">listdir</span><span class="p">(</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;my_df.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;my_jdict.json&#39;</span><span class="p">,</span> <span class="s1">&#39;my_string.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;my_array.npy&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Retrieve each one of those files and check that the retrieved python objects are equal to the originals</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_df.csv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">my_df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_jdict.json&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">my_jdict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_string.txt&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">my_string</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_array.npy&#39;</span><span class="p">],</span> <span class="n">my_array</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Clean up the temporary folder</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">temp_dir</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="py function">
 <dt id="focal.extension_store.string_to_bytes">
 <code class="sig-prename descclassname">focal.extension_store.</code><code class="sig-name descname">string_to_bytes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">/</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'strict'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#focal.extension_store.string_to_bytes" title="Permalink to this definition">¶</a></dt>
