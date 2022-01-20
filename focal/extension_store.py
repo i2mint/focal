@@ -27,7 +27,7 @@ obj_to_pickle_bytes = pickle.dumps
 jdict_to_bytes = Pipe(json.dumps, str.encode)
 
 
-def df_to_csv_bytes(df: pd.DataFrame, format="utf-8", index=False):
+def df_to_csv_bytes(df: pd.DataFrame, format='utf-8', index=False):
     return bytes(df.to_csv(index=index), format)
 
 
@@ -55,20 +55,20 @@ bytes_to_array = Pipe(BytesIO, np.load)
 
 
 extensions_preset_postget = {
-    "csv": {"preset": df_to_csv_bytes, "postget": csv_bytes_to_df},
-    "xlsx": {"preset": df_to_xlsx_bytes, "postget": excel_bytes_to_df},
-    "p": {"preset": obj_to_pickle_bytes, "postget": pickle_bytes_to_obj},
-    "json": {"preset": jdict_to_bytes, "postget": json_bytes_to_json},
-    "txt": {"preset": string_to_bytes, "postget": text_byte_to_string},
-    "npy": {"preset": array_to_bytes, "postget": bytes_to_array},
+    'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
+    'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
+    'p': {'preset': obj_to_pickle_bytes, 'postget': pickle_bytes_to_obj},
+    'json': {'preset': jdict_to_bytes, 'postget': json_bytes_to_json},
+    'txt': {'preset': string_to_bytes, 'postget': text_byte_to_string},
+    'npy': {'preset': array_to_bytes, 'postget': bytes_to_array},
 }
 
 
 def get_extension(k):
-    return k.split(".")[-1]
+    return k.split('.')[-1]
 
 
-def make_conversion_for_obj(k, v, extensions_preset_postget, func_type="preset"):
+def make_conversion_for_obj(k, v, extensions_preset_postget, func_type='preset'):
     extension = get_extension(k)
     conv_func = extensions_preset_postget[extension][func_type]
     return conv_func(v)
@@ -77,12 +77,12 @@ def make_conversion_for_obj(k, v, extensions_preset_postget, func_type="preset")
 postget = partial(
     make_conversion_for_obj,
     extensions_preset_postget=extensions_preset_postget,
-    func_type="postget",
+    func_type='postget',
 )
 preset = partial(
     make_conversion_for_obj,
     extensions_preset_postget=extensions_preset_postget,
-    func_type="preset",
+    func_type='preset',
 )
 
 # def preset(k, v):
