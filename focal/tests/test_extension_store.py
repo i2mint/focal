@@ -1,7 +1,5 @@
-from focal.extension_store import *
 import pytest
-import numpy as np
-import pandas as pd
+from focal.extension_store import *
 
 test_df = pd.DataFrame({"A": [0, 1], "B": [1, 6]})
 test_json = {"a": 1, "b": [1, 2, 3], "c": "string"}
