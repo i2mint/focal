@@ -15,7 +15,7 @@ Instantiate a store, persisting in our local temporary folder
 
 >>> d = MultiFileStore(temp_dir.name)
 
-Here are a few object to save into our folder:
+Here are a few objects to save into our folder:
 
 >>> my_df = pd.DataFrame({'A': [0, 1], 'B': [1, 6]})
 >>> my_jdict = {'a': 1, 'b': [1, 2, 3], 'c': 'string'}
@@ -29,18 +29,18 @@ Now we can save each of these in a relevant format:
 >>> d['my_string.txt'] = my_string
 >>> d['my_array.npy'] = my_array
 
-Check that our folder contains those files
+Our folder now contains those files
 
 >>> assert set(listdir(temp_dir.name)) == {'my_df.csv', 'my_jdict.json', 'my_string.txt', 'my_array.npy'}
 
-Retrieve each one of those files and check that the retrieved python objects are equal to the originals
+We can retrieve each one of those files and check that the python objects are equal to the originals
 
 >>> assert d['my_df.csv'].equals(my_df)
 >>> assert d['my_jdict.json'] == my_jdict
 >>> assert d['my_string.txt'] == my_string
 >>> assert np.array_equal(d['my_array.npy'], my_array)
 
-Clean up the temporary folder
+Finally, we clean up the temporary folder
 
 >>> temp_dir.cleanup()
 
