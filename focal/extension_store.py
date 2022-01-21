@@ -17,28 +17,22 @@ Instantiate a store, persisting in our local temporary folder
 
 Here are a few objects to save into our folder:
 
->>> my_df = pd.DataFrame({'A': [0, 1], 'B': [1, 6]})
 >>> my_jdict = {'a': 1, 'b': [1, 2, 3], 'c': 'string'}
 >>> my_string = 'test_string'
->>> my_array = np.random.random((10, 10))
 
 Now we can save each of these in a relevant format:
 
->>> d['my_df.csv'] = my_df
 >>> d['my_jdict.json'] = my_jdict
 >>> d['my_string.txt'] = my_string
->>> d['my_array.npy'] = my_array
 
 Our folder now contains those files
 
->>> assert set(listdir(temp_dir.name)) == {'my_df.csv', 'my_jdict.json', 'my_string.txt', 'my_array.npy'}
+>>> assert set(listdir(temp_dir.name)) == {'my_jdict.json', 'my_string.txt'}
 
 We can retrieve each one of those files and check that the python objects are equal to the originals
 
->>> assert d['my_df.csv'].equals(my_df)
 >>> assert d['my_jdict.json'] == my_jdict
 >>> assert d['my_string.txt'] == my_string
->>> assert np.array_equal(d['my_array.npy'], my_array)
 
 Finally, we clean up the temporary folder
 
@@ -51,7 +45,6 @@ import json
 from io import BytesIO
 from functools import partial
 from contextlib import suppress
-from importlib import import_module
 
 from dol import wrap_kvs, Pipe
 from py2store import LocalBinaryStore
