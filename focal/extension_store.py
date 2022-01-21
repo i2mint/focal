@@ -50,80 +50,72 @@ import pickle
 import json
 from io import BytesIO
 from functools import partial
-
-import pandas as pd
-import numpy as np
+from contextlib import suppress
+from importlib import import_module
 
 from dol import wrap_kvs, Pipe
 from py2store import LocalBinaryStore
 
-# ---------------------------Object to bytes---------------------------------------------
+# ---------------------------Object to bytes---------------------------------------------------------------------------
 
 string_to_bytes = str.encode
 obj_to_pickle_bytes = pickle.dumps
 jdict_to_bytes = Pipe(json.dumps, str.encode)
 
+# ------------------------------Bytes to object------------------------------------------------------------------------
 
-def df_to_csv_bytes(df: pd.DataFrame, format='utf-8', index=False):
-    return bytes(df.to_csv(index=index), format)
-
-
-def df_to_xlsx_bytes(df: pd.DataFrame, byte_to_file_func=BytesIO):
-    towrite = byte_to_file_func()
-    df.to_excel(towrite, index=False)
-    towrite.seek(0)
-    return towrite.getvalue()
-
-
-def array_to_bytes(arr: np.ndarray) -> bytes:
-    np_bytes = BytesIO()
-    np.save(np_bytes, arr)
-    return np_bytes.getvalue()
-
-
-# ------------------------------Bytes to object------------------------------------------
-
-csv_bytes_to_df = Pipe(BytesIO, pd.read_csv)
-excel_bytes_to_df = Pipe(BytesIO, pd.read_excel)
 pickle_bytes_to_obj = pickle.loads
 json_bytes_to_json = json.loads
 text_byte_to_string = bytes.decode
-bytes_to_array = Pipe(BytesIO, np.load)
 
 extensions_preset_postget = {
-    'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
-    'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
     'p': {'preset': obj_to_pickle_bytes, 'postget': pickle_bytes_to_obj},
     'json': {'preset': jdict_to_bytes, 'postget': json_bytes_to_json},
     'txt': {'preset': string_to_bytes, 'postget': text_byte_to_string},
-    'npy': {'preset': array_to_bytes, 'postget': bytes_to_array},
 }
 
-import importlib
-
-def add_package_dependent_extensions(imports=('numpy', 'pandas'),
-                                     updates=
-                                     ({'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}},
-                                      {'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
-                                       'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df}})
-                                     ):
-    for module_name, update in zip(imports, updates):
-        try:
-            importlib.import_module(module_name)
-            extensions_preset_postget.update(update)
-        except Exception as E:
-            print(f'Module {module_name} not found')
-    return extensions_preset_postget
+# ------------------------------Extra extensions, added only if needed package are found--------------------------------
 
 
-extensions_preset_postget = add_package_dependent_extensions()
+with suppress(ModuleNotFoundError):
+    import numpy as np
+
+    def array_to_bytes(arr: np.ndarray) -> bytes:
+        np_bytes = BytesIO()
+        np.save(np_bytes, arr)
+        return np_bytes.getvalue()
+
+    bytes_to_array = Pipe(BytesIO, np.load)
+    extensions_preset_postget.update({'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}})
+
+
+with suppress(ModuleNotFoundError):
+    import pandas as pd
+
+    def df_to_csv_bytes(df: pd.DataFrame, format='utf-8', index=False):
+        return bytes(df.to_csv(index=index), format)
+
+    def df_to_xlsx_bytes(df: pd.DataFrame, byte_to_file_func=BytesIO):
+        towrite = byte_to_file_func()
+        df.to_excel(towrite, index=False)
+        towrite.seek(0)
+        return towrite.getvalue()
+
+    csv_bytes_to_df = Pipe(BytesIO, pd.read_csv)
+    excel_bytes_to_df = Pipe(BytesIO, pd.read_excel)
+    extensions_preset_postget.update({
+        'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
+        'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
+    })
 
 
 def get_extension(k):
     return k.split('.')[-1]
 
 
-def make_conversion_for_obj(k, v, extensions_preset_postget, func_type='preset'):
+def make_conversion_for_obj(
+        k, v, extensions_preset_postget, func_type='preset'
+):
     extension = get_extension(k)
     conv_func = extensions_preset_postget[extension][func_type]
     return conv_func(v)
