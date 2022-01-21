@@ -101,12 +101,17 @@ extensions_preset_postget = {
 
 import importlib
 
-def add_package_dependent_extensions(imports=('numpy', 'pandas'),
-                                     updates=
-                                     ({'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}},
-                                      {'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
-                                       'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df}})
-                                     ):
+
+def add_package_dependent_extensions(
+    imports=('numpy', 'pandas'),
+    updates=(
+        {'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}},
+        {
+            'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
+            'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
+        },
+    ),
+):
     for module_name, update in zip(imports, updates):
         try:
             importlib.import_module(module_name)
