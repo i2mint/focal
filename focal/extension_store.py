@@ -90,7 +90,6 @@ json_bytes_to_json = json.loads
 text_byte_to_string = bytes.decode
 bytes_to_array = Pipe(BytesIO, np.load)
 
-
 extensions_preset_postget = {
     'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
     'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
@@ -99,6 +98,25 @@ extensions_preset_postget = {
     'txt': {'preset': string_to_bytes, 'postget': text_byte_to_string},
     'npy': {'preset': array_to_bytes, 'postget': bytes_to_array},
 }
+
+import importlib
+
+def add_package_dependent_extensions(imports=('numpy', 'pandas'),
+                                     updates=
+                                     ({'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}},
+                                      {'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
+                                       'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df}})
+                                     ):
+    for module_name, update in zip(imports, updates):
+        try:
+            importlib.import_module(module_name)
+            extensions_preset_postget.update(update)
+        except Exception as E:
+            print(f'Module {module_name} not found')
+    return extensions_preset_postget
+
+
+extensions_preset_postget = add_package_dependent_extensions()
 
 
 def get_extension(k):
@@ -121,19 +139,6 @@ preset = partial(
     extensions_preset_postget=extensions_preset_postget,
     func_type='preset',
 )
-
-# def preset(k, v):
-#     extension = get_extension(k)
-#     obj_to_byte = extensions_preset_postget[extension]['preset']
-#
-#     return obj_to_byte(v)
-#
-#
-# def postget(k, v):
-#     extension = get_extension(k)
-#     byte_to_obj = extensions_preset_postget[extension]['postget']
-#
-#     return byte_to_obj(v)
 
 multi_extension_wrap = partial(wrap_kvs, postget=postget, preset=preset)
 MultiFileStore = multi_extension_wrap(LocalBinaryStore)
