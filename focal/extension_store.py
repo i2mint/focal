@@ -92,29 +92,8 @@ with suppress(ModuleNotFoundError):
 with suppress(ModuleNotFoundError):
     import pandas as pd
 
-<<<<<<< HEAD
     def df_to_csv_bytes(df: pd.DataFrame, format='utf-8', index=False):
         return bytes(df.to_csv(index=index), format)
-=======
-
-def add_package_dependent_extensions(
-    imports=('numpy', 'pandas'),
-    updates=(
-        {'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}},
-        {
-            'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
-            'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
-        },
-    ),
-):
-    for module_name, update in zip(imports, updates):
-        try:
-            importlib.import_module(module_name)
-            extensions_preset_postget.update(update)
-        except Exception as E:
-            print(f'Module {module_name} not found')
-    return extensions_preset_postget
->>>>>>> 537f70e87355ac60d63abbacecd2d036ffd037fb
 
     def df_to_xlsx_bytes(df: pd.DataFrame, byte_to_file_func=BytesIO):
         towrite = byte_to_file_func()
