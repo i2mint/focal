@@ -86,7 +86,9 @@ with suppress(ModuleNotFoundError):
         return np_bytes.getvalue()
 
     bytes_to_array = Pipe(BytesIO, np.load)
-    extensions_preset_postget.update({'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}})
+    extensions_preset_postget.update(
+        {'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}}
+    )
 
 
 with suppress(ModuleNotFoundError):
@@ -103,19 +105,19 @@ with suppress(ModuleNotFoundError):
 
     csv_bytes_to_df = Pipe(BytesIO, pd.read_csv)
     excel_bytes_to_df = Pipe(BytesIO, pd.read_excel)
-    extensions_preset_postget.update({
-        'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
-        'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
-    })
+    extensions_preset_postget.update(
+        {
+            'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
+            'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
+        }
+    )
 
 
 def get_extension(k):
     return k.split('.')[-1]
 
 
-def make_conversion_for_obj(
-        k, v, extensions_preset_postget, func_type='preset'
-):
+def make_conversion_for_obj(k, v, extensions_preset_postget, func_type='preset'):
     extension = get_extension(k)
     conv_func = extensions_preset_postget[extension][func_type]
     return conv_func(v)
