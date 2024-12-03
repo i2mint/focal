@@ -1,4 +1,0 @@
-focal
-=====
-.. automodule:: focal
-   :members:

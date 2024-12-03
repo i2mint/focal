@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>focal.extension_store &mdash; focal 0.1.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=ca7ad2ea"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="focal.parse_format" href="parse_format.html" />
+    <link rel="prev" title="focal" href="../focal.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            focal
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../focal.html">focal</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">focal.extension_store</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#focal.extension_store.LocalBinaryStore"><code class="docutils literal notranslate"><span class="pre">LocalBinaryStore</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#focal.extension_store.MultiFileStore"><code class="docutils literal notranslate"><span class="pre">MultiFileStore</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#focal.extension_store.string_to_bytes"><code class="docutils literal notranslate"><span class="pre">string_to_bytes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#focal.extension_store.text_byte_to_string"><code class="docutils literal notranslate"><span class="pre">text_byte_to_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parse_format.html">focal.parse_format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_extension_store.html">focal.tests.test_extension_store</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">focal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">focal.extension_store</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/focal/extension_store.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-focal.extension_store">
+<span id="focal-extension-store"></span><h1>focal.extension_store<a class="headerlink" href="#module-focal.extension_store" title="Link to this heading"></a></h1>
+<p>Stores that are extension-aware when reading and writing.</p>
+<p>Make a temporary folder</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Check that it is empty for now</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span>  <span class="n">listdir</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">listdir</span><span class="p">(</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<p>Instantiate a store, persisting in our local temporary folder</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">MultiFileStore</span><span class="p">(</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here are a few objects to save into our folder:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_jdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_string</span> <span class="o">=</span> <span class="s1">&#39;test_string&#39;</span>
+</pre></div>
+</div>
+<p>Now we can save each of these in a relevant format:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_jdict.json&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_jdict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_string.txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_string</span>
+</pre></div>
+</div>
+<p>Our folder now contains those∑ files</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">listdir</span><span class="p">(</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;my_jdict.json&#39;</span><span class="p">,</span> <span class="s1">&#39;my_string.txt&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>We can retrieve each one of those files and check that the python objects are equal to the originals</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_jdict.json&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">my_jdict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;my_string.txt&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">my_string</span>
+</pre></div>
+</div>
+<p>Finally, we clean up the temporary folder</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">temp_dir</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="focal.extension_store.LocalBinaryStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">focal.extension_store.</span></span><span class="sig-name descname"><span class="pre">LocalBinaryStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/focal/extension_store.html#LocalBinaryStore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#focal.extension_store.LocalBinaryStore" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="focal.extension_store.MultiFileStore">
+<span class="sig-prename descclassname"><span class="pre">focal.extension_store.</span></span><span class="sig-name descname"><span class="pre">MultiFileStore</span></span><a class="headerlink" href="#focal.extension_store.MultiFileStore" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#focal.extension_store.LocalBinaryStore" title="focal.extension_store.LocalBinaryStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalBinaryStore</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="focal.extension_store.string_to_bytes">
+<span class="sig-prename descclassname"><span class="pre">focal.extension_store.</span></span><span class="sig-name descname"><span class="pre">string_to_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#focal.extension_store.string_to_bytes" title="Link to this definition"></a></dt>
+<dd><p>Encode the string using the codec registered for encoding.</p>
+<dl class="simple">
+<dt>encoding</dt><dd><p>The encoding in which to encode the string.</p>
+</dd>
+<dt>errors</dt><dd><p>The error handling scheme to use for encoding errors.
+The default is ‘strict’ meaning that encoding errors raise a
+UnicodeEncodeError.  Other possible values are ‘ignore’, ‘replace’ and
+‘xmlcharrefreplace’ as well as any other name registered with
+codecs.register_error that can handle UnicodeEncodeErrors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="focal.extension_store.text_byte_to_string">
+<span class="sig-prename descclassname"><span class="pre">focal.extension_store.</span></span><span class="sig-name descname"><span class="pre">text_byte_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#focal.extension_store.text_byte_to_string" title="Link to this definition"></a></dt>
+<dd><p>Decode the bytes using the codec registered for encoding.</p>
+<dl class="simple">
+<dt>encoding</dt><dd><p>The encoding with which to decode the bytes.</p>
+</dd>
+<dt>errors</dt><dd><p>The error handling scheme to use for the handling of decoding errors.
+The default is ‘strict’ meaning that decoding errors raise a
+UnicodeDecodeError. Other possible values are ‘ignore’ and ‘replace’
+as well as any other name registered with codecs.register_error that
+can handle UnicodeDecodeErrors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../focal.html" class="btn btn-neutral float-left" title="focal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parse_format.html" class="btn btn-neutral float-right" title="focal.parse_format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
