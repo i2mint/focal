@@ -39,6 +39,7 @@ Finally, we clean up the temporary folder
 >>> temp_dir.cleanup()
 
 """
+
 import os
 import pickle
 import json
@@ -58,7 +59,7 @@ class LocalBinaryStore(Files):
         first_bracket_idx = None
         for idx, dir in enumerate(dirs):
             if (
-                '{' in dir
+                "{" in dir
             ):  # TODO: Replace that hack, may be using regex or string.Formatter
                 first_bracket_idx = idx
                 break
@@ -69,7 +70,7 @@ class LocalBinaryStore(Files):
 
         else:
             rootdir = path_format
-            subpath = ''
+            subpath = ""
 
         super().__init__(rootdir=rootdir, subpath=subpath, max_levels=max_levels)
 
@@ -87,9 +88,9 @@ json_bytes_to_json = json.loads
 text_byte_to_string = bytes.decode
 
 extensions_preset_postget = {
-    'p': {'preset': obj_to_pickle_bytes, 'postget': pickle_bytes_to_obj},
-    'json': {'preset': jdict_to_bytes, 'postget': json_bytes_to_json},
-    'txt': {'preset': string_to_bytes, 'postget': text_byte_to_string},
+    "p": {"preset": obj_to_pickle_bytes, "postget": pickle_bytes_to_obj},
+    "json": {"preset": jdict_to_bytes, "postget": json_bytes_to_json},
+    "txt": {"preset": string_to_bytes, "postget": text_byte_to_string},
 }
 
 # ------------------------------Extra extensions, added only if needed package are found--------------------------------
@@ -105,13 +106,13 @@ with suppress(ModuleNotFoundError):
 
     bytes_to_array = Pipe(BytesIO, np.load)
     extensions_preset_postget.update(
-        {'npy': {'preset': array_to_bytes, 'postget': bytes_to_array}}
+        {"npy": {"preset": array_to_bytes, "postget": bytes_to_array}}
     )
 
 with suppress(ModuleNotFoundError):
     import pandas as pd
 
-    def df_to_csv_bytes(df: pd.DataFrame, format='utf-8', index=False):
+    def df_to_csv_bytes(df: pd.DataFrame, format="utf-8", index=False):
         return bytes(df.to_csv(index=index), format)
 
     def df_to_xlsx_bytes(df: pd.DataFrame, byte_to_file_func=BytesIO):
@@ -124,17 +125,17 @@ with suppress(ModuleNotFoundError):
     excel_bytes_to_df = Pipe(BytesIO, pd.read_excel)
     extensions_preset_postget.update(
         {
-            'xlsx': {'preset': df_to_xlsx_bytes, 'postget': excel_bytes_to_df},
-            'csv': {'preset': df_to_csv_bytes, 'postget': csv_bytes_to_df},
+            "xlsx": {"preset": df_to_xlsx_bytes, "postget": excel_bytes_to_df},
+            "csv": {"preset": df_to_csv_bytes, "postget": csv_bytes_to_df},
         }
     )
 
 
 def get_extension(k):
-    return k.split('.')[-1]
+    return k.split(".")[-1]
 
 
-def make_conversion_for_obj(k, v, extensions_preset_postget, func_type='preset'):
+def make_conversion_for_obj(k, v, extensions_preset_postget, func_type="preset"):
     extension = get_extension(k)
     conv_func = extensions_preset_postget[extension][func_type]
     return conv_func(v)
@@ -143,12 +144,12 @@ def make_conversion_for_obj(k, v, extensions_preset_postget, func_type='preset')
 postget = partial(
     make_conversion_for_obj,
     extensions_preset_postget=extensions_preset_postget,
-    func_type='postget',
+    func_type="postget",
 )
 preset = partial(
     make_conversion_for_obj,
     extensions_preset_postget=extensions_preset_postget,
-    func_type='preset',
+    func_type="preset",
 )
 
 multi_extension_wrap = partial(wrap_kvs, postget=postget, preset=preset)
