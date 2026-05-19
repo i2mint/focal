@@ -5,18 +5,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>focal.parse_format &mdash; focal 0.1.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+  <title>focal.parse_format &mdash; focal 0.1.8 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=ca7ad2ea"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/documentation_options.js?v=22607128"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../_static/copybutton.js?v=f281be69"></script>
@@ -480,26 +480,26 @@
 <span class="sd">See the end of the source file for the license of use.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">absolute_import</span>
 
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.9.0&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;1.9.0&quot;</span>
 
 <span class="c1"># yes, I now have two problems</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">tzinfo</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">tzinfo</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="s1">&#39;parse search findall with_pattern&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="s2">&quot;parse search findall with_pattern&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="with_pattern">
 <a class="viewcode-back" href="../../module_docs/focal/parse_format.html#focal.parse_format.with_pattern">[docs]</a>
-<span class="k">def</span> <span class="nf">with_pattern</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">regex_group_count</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">with_pattern</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">regex_group_count</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Attach a regular expression pattern matcher to a custom type converter</span>
 <span class="sd">    function.</span>
 
@@ -521,7 +521,7 @@
 <span class="sd">    :return: wrapped function</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
         <span class="n">func</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern</span>
         <span class="n">func</span><span class="o">.</span><span class="n">regex_group_count</span> <span class="o">=</span> <span class="n">regex_group_count</span>
         <span class="k">return</span> <span class="n">func</span>
@@ -530,7 +530,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">int_convert</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">int_convert</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a string to an integer.</span>
 
 <span class="sd">    The string may start with a sign.</span>
@@ -542,59 +542,62 @@
 
 <span class="sd">    It may also have other non-numeric characters that we can ignore.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">CHARS</span> <span class="o">=</span> <span class="s1">&#39;0123456789abcdefghijklmnopqrstuvwxyz&#39;</span>
+    <span class="n">CHARS</span> <span class="o">=</span> <span class="s2">&quot;0123456789abcdefghijklmnopqrstuvwxyz&quot;</span>
 
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
             <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s1">&#39;bB&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;bB&quot;</span><span class="p">:</span>
                 <span class="n">base</span> <span class="o">=</span> <span class="mi">2</span>
-            <span class="k">elif</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s1">&#39;oO&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;oO&quot;</span><span class="p">:</span>
                 <span class="n">base</span> <span class="o">=</span> <span class="mi">8</span>
-            <span class="k">elif</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s1">&#39;xX&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;xX&quot;</span><span class="p">:</span>
                 <span class="n">base</span> <span class="o">=</span> <span class="mi">16</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># just go with the base specifed</span>
                 <span class="k">pass</span>
 
         <span class="n">chars</span> <span class="o">=</span> <span class="n">CHARS</span><span class="p">[:</span><span class="n">base</span><span class="p">]</span>
-        <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="n">chars</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[^</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="n">chars</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">sign</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">f</span>
 
 
-<span class="k">def</span> <span class="nf">percentage</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">percentage</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">string</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">100.0</span>
 
 
-<span class="k">class</span> <span class="nc">FixedTzOffset</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fixed offset in minutes east from UTC.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FixedTzOffset</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fixed offset in minutes east from UTC.&quot;&quot;&quot;</span>
 
     <span class="n">ZERO</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span><span class="p">,)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span><span class="p">,</span>
+        <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">utcoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span>
 
-    <span class="k">def</span> <span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tzname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
-    <span class="k">def</span> <span class="nf">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ZERO</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_offset</span>
 
 
@@ -623,15 +626,15 @@
     <span class="n">Dec</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
     <span class="n">December</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">DAYS_PAT</span> <span class="o">=</span> <span class="s1">&#39;(Mon|Tue|Wed|Thu|Fri|Sat|Sun)&#39;</span>
-<span class="n">MONTHS_PAT</span> <span class="o">=</span> <span class="s1">&#39;(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)&#39;</span>
-<span class="n">ALL_MONTHS_PAT</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MONTHS_MAP</span><span class="p">)</span>
-<span class="n">TIME_PAT</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d{1,2}:\d{1,2}(:\d{1,2}(\.\d+)?)?)&#39;</span>
-<span class="n">AM_PAT</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\s+[AP]M)&#39;</span>
-<span class="n">TZ_PAT</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\s+[-+]\d\d?:?\d\d)&#39;</span>
+<span class="n">DAYS_PAT</span> <span class="o">=</span> <span class="s2">&quot;(Mon|Tue|Wed|Thu|Fri|Sat|Sun)&quot;</span>
+<span class="n">MONTHS_PAT</span> <span class="o">=</span> <span class="s2">&quot;(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)&quot;</span>
+<span class="n">ALL_MONTHS_PAT</span> <span class="o">=</span> <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MONTHS_MAP</span><span class="p">)</span>
+<span class="n">TIME_PAT</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\d{1,2}:\d{1,2}(:\d{1,2}(\.\d+)?)?)&quot;</span>
+<span class="n">AM_PAT</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\s+[AP]M)&quot;</span>
+<span class="n">TZ_PAT</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\s+[-+]\d\d?:?\d\d)&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">date_convert</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">date_convert</span><span class="p">(</span>
     <span class="n">string</span><span class="p">,</span>
     <span class="n">match</span><span class="p">,</span>
     <span class="n">ymd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -654,11 +657,11 @@
         <span class="n">m</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">mm</span><span class="p">]</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">dd</span><span class="p">]</span>
     <span class="k">elif</span> <span class="n">ymd</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;[-/\s]&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="p">[</span><span class="n">ymd</span><span class="p">])</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;[-/\s]&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="p">[</span><span class="n">ymd</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">mdy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;[-/\s]&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="p">[</span><span class="n">mdy</span><span class="p">])</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;[-/\s]&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="p">[</span><span class="n">mdy</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">dmy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">d</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;[-/\s]&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="p">[</span><span class="n">dmy</span><span class="p">])</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;[-/\s]&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="p">[</span><span class="n">dmy</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">d_m_y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">d</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">d_m_y</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
@@ -669,14 +672,14 @@
 
     <span class="n">H</span> <span class="o">=</span> <span class="n">M</span> <span class="o">=</span> <span class="n">S</span> <span class="o">=</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">hms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">groups</span><span class="p">[</span><span class="n">hms</span><span class="p">]:</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">hms</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">hms</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">H</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">t</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">H</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">t</span>
-            <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
-                <span class="n">S</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-                <span class="n">u</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000000</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+                <span class="n">S</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000000</span><span class="p">)</span>
             <span class="n">S</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
         <span class="n">H</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
         <span class="n">M</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
@@ -685,19 +688,19 @@
         <span class="n">am</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">am</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">am</span><span class="p">:</span>
             <span class="n">am</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">am</span> <span class="o">==</span> <span class="s1">&#39;AM&#39;</span> <span class="ow">and</span> <span class="n">H</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">am</span> <span class="o">==</span> <span class="s2">&quot;AM&quot;</span> <span class="ow">and</span> <span class="n">H</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
             <span class="c1"># correction for &quot;12&quot; hour functioning as &quot;0&quot; hour: 12:15 AM = 00:15 by 24 hr clock</span>
             <span class="n">H</span> <span class="o">-=</span> <span class="mi">12</span>
-        <span class="k">elif</span> <span class="n">am</span> <span class="o">==</span> <span class="s1">&#39;PM&#39;</span> <span class="ow">and</span> <span class="n">H</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">am</span> <span class="o">==</span> <span class="s2">&quot;PM&quot;</span> <span class="ow">and</span> <span class="n">H</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
             <span class="c1"># no correction needed: 12PM is midday, 12:00 by 24 hour clock</span>
             <span class="k">pass</span>
-        <span class="k">elif</span> <span class="n">am</span> <span class="o">==</span> <span class="s1">&#39;PM&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">am</span> <span class="o">==</span> <span class="s2">&quot;PM&quot;</span><span class="p">:</span>
             <span class="n">H</span> <span class="o">+=</span> <span class="mi">12</span>
 
     <span class="k">if</span> <span class="n">tz</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tz</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">tz</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">tz</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
-        <span class="n">tz</span> <span class="o">=</span> <span class="n">FixedTzOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;UTC&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tz</span> <span class="o">==</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span>
+        <span class="n">tz</span> <span class="o">=</span> <span class="n">FixedTzOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;UTC&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">tz</span><span class="p">:</span>
         <span class="n">tz</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">tz</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
@@ -705,14 +708,14 @@
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sign</span> <span class="o">=</span> <span class="n">tz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">tz</span><span class="p">:</span>
-                <span class="n">tzh</span><span class="p">,</span> <span class="n">tzm</span> <span class="o">=</span> <span class="n">tz</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">tz</span><span class="p">:</span>
+                <span class="n">tzh</span><span class="p">,</span> <span class="n">tzm</span> <span class="o">=</span> <span class="n">tz</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">tz</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># &#39;snnn&#39;</span>
                 <span class="n">tzh</span><span class="p">,</span> <span class="n">tzm</span> <span class="o">=</span> <span class="n">tz</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tz</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">tzh</span><span class="p">,</span> <span class="n">tzm</span> <span class="o">=</span> <span class="n">tz</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">tz</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
             <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tzm</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">tzh</span><span class="p">)</span> <span class="o">*</span> <span class="mi">60</span>
-            <span class="k">if</span> <span class="n">sign</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sign</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
                 <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="n">offset</span>
             <span class="n">tz</span> <span class="o">=</span> <span class="n">FixedTzOffset</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">tz</span><span class="p">)</span>
 
@@ -730,51 +733,50 @@
     <span class="k">return</span> <span class="n">d</span>
 
 
-<span class="k">class</span> <span class="nc">TooManyFields</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TooManyFields</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
     <span class="k">pass</span>
 
 
-<span class="k">class</span> <span class="nc">RepeatedNameError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RepeatedNameError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
     <span class="k">pass</span>
 
 
 <span class="c1"># note: {} are handled separately</span>
 <span class="c1"># note: I don&#39;t use r&#39;&#39; here because Sublime Text 2 syntax highlight has a fit</span>
-<span class="n">REGEX_SAFETY</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;([?</span><span class="se">\\\\</span><span class="s1">.[\]()*+\^$!\|])&#39;</span><span class="p">)</span>
+<span class="n">REGEX_SAFETY</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;([?</span><span class="se">\\\\</span><span class="s2">.[\]()*+\^$!\|])&quot;</span><span class="p">)</span>
 
 <span class="c1"># allowed field types</span>
-<span class="n">ALLOWED_TYPES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;nbox</span><span class="si">%f</span><span class="s1">FegwWdDsS&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span> <span class="o">+</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">&#39;ieahgcts&#39;</span><span class="p">])</span>
+<span class="n">ALLOWED_TYPES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s2">&quot;nbox</span><span class="si">%f</span><span class="s2">FegwWdDsS&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;t&quot;</span> <span class="o">+</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;ieahgcts&quot;</span><span class="p">])</span>
 
 
-<span class="k">def</span> <span class="nf">extract_format</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">extra_types</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull apart the format [[fill]align][0][width][.precision][type]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_format</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">extra_types</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull apart the format [[fill]align][0][width][.precision][type]&quot;&quot;&quot;</span>
     <span class="n">fill</span> <span class="o">=</span> <span class="n">align</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s1">&#39;&lt;&gt;=^&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;&lt;&gt;=^&quot;</span><span class="p">:</span>
         <span class="n">align</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">format</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s1">&#39;&lt;&gt;=^&#39;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">format</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;&lt;&gt;=^&quot;</span><span class="p">:</span>
         <span class="n">fill</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">align</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
 
     <span class="n">zero</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">if</span> <span class="nb">format</span> <span class="ow">and</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="ow">and</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
-    <span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">while</span> <span class="nb">format</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
             <span class="k">break</span>
         <span class="n">width</span> <span class="o">+=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
-    <span class="k">if</span> <span class="nb">format</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">format</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
         <span class="c1"># Precision isn&#39;t needed but we need to capture it so that</span>
         <span class="c1"># the ValueError isn&#39;t raised.</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># drop the &#39;.&#39;</span>
-        <span class="n">precision</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">while</span> <span class="nb">format</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
                 <span class="k">break</span>
@@ -784,19 +786,18 @@
     <span class="c1"># the rest is the type, if present</span>
     <span class="nb">type</span> <span class="o">=</span> <span class="nb">format</span>
     <span class="k">if</span> <span class="nb">type</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALLOWED_TYPES</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">extra_types</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;format spec </span><span class="si">%r</span><span class="s1"> not recognised&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;format spec </span><span class="si">%r</span><span class="s2"> not recognised&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">locals</span><span class="p">()</span>
 
 
-<span class="n">PARSE_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;({{|}}|{\w*(?:(?:\.\w+)|(?:\[[^\]]+\]))*(?::[^}]+)?})&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="n">PARSE_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;({{|}}|{\w*(?:(?:\.\w+)|(?:\[[^\]]+\]))*(?::[^}]+)?})&quot;&quot;&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">Parser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encapsulate a format string that may be used to parse other strings.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Parser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encapsulate a format string that may be used to parse other strings.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># a mapping of a name as in {hello.world} to a regex-group compatible</span>
         <span class="c1"># name, like hello__world Its used to prevent the transformation of</span>
         <span class="c1"># name-to-group and group to name to fail subtly, such as in:</span>
@@ -825,48 +826,51 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__search_re</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__match_re</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;format </span><span class="si">%r</span><span class="s1"> -&gt; </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expression</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;format </span><span class="si">%r</span><span class="s2"> -&gt; </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expression</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%r</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">[:</span><span class="mi">17</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;...&#39;</span><span class="p">,)</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%r</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%r</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">[:</span><span class="mi">17</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%r</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">_search_re</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_search_re</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__search_re</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__search_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_expression</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_flags</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
                 <span class="c1"># access error through sys to keep py3k and backward compat</span>
                 <span class="n">e</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;this version only supports 100 named groups&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;this version only supports 100 named groups&quot;</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="n">TooManyFields</span><span class="p">(</span>
-                        <span class="s1">&#39;sorry, you are attempting to parse &#39;</span> <span class="s1">&#39;too many complex fields&#39;</span>
+                        <span class="s2">&quot;sorry, you are attempting to parse &quot;</span> <span class="s2">&quot;too many complex fields&quot;</span>
                     <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__search_re</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">_match_re</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_match_re</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__match_re</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">expression</span> <span class="o">=</span> <span class="s1">&#39;^</span><span class="si">%s</span><span class="s1">$&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expression</span>
+            <span class="n">expression</span> <span class="o">=</span> <span class="s2">&quot;^</span><span class="si">%s</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expression</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__match_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_flags</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
                 <span class="c1"># access error through sys to keep py3k and backward compat</span>
                 <span class="n">e</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;this version only supports 100 named groups&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;this version only supports 100 named groups&quot;</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="n">TooManyFields</span><span class="p">(</span>
-                        <span class="s1">&#39;sorry, you are attempting to parse &#39;</span> <span class="s1">&#39;too many complex fields&#39;</span>
+                        <span class="s2">&quot;sorry, you are attempting to parse &quot;</span> <span class="s2">&quot;too many complex fields&quot;</span>
                     <span class="p">)</span>
             <span class="k">except</span> <span class="n">re</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                    <span class="s1">&#39;Group names (e.g. (?P&lt;name&gt;) can &#39;</span>
+                    <span class="s2">&quot;Group names (e.g. (?P&lt;name&gt;) can &quot;</span>
                     <span class="s2">&quot;cause failure, as they are not escaped properly: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">expression</span>
                 <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__match_re</span>
 
-    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Match my format to the string exactly.</span>
 
 <span class="sd">        Return a Result or Match instance or None if there&#39;s no match.</span>
@@ -880,7 +884,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endpos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endpos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Search the string for my format.</span>
 
 <span class="sd">        Optionally start the search at &quot;pos&quot; character index and limit the</span>
@@ -903,8 +907,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">findall</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endpos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">findall</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">string</span><span class="p">,</span>
+        <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">endpos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Search &quot;string&quot; for all occurrences of &quot;format&quot;.</span>
 
@@ -921,18 +930,18 @@
             <span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">endpos</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="n">evaluate_result</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_expand_named_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">named_fields</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_expand_named_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">named_fields</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">named_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="c1"># split &#39;aaa[bbb][ccc]...&#39; into &#39;aaa&#39; and &#39;[bbb][ccc]...&#39;</span>
-            <span class="n">basename</span><span class="p">,</span> <span class="n">subkeys</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([^\[]+)(.*)&#39;</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+            <span class="n">basename</span><span class="p">,</span> <span class="n">subkeys</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([^\[]+)(.*)&quot;</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
 
             <span class="c1"># create nested dictionaries {&#39;aaa&#39;: {&#39;bbb&#39;: {&#39;ccc&#39;: ...}}}</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">result</span>
             <span class="n">k</span> <span class="o">=</span> <span class="n">basename</span>
 
             <span class="k">if</span> <span class="n">subkeys</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\[[^\]]+\]&#39;</span><span class="p">,</span> <span class="n">subkeys</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[[^\]]+\]&quot;</span><span class="p">,</span> <span class="n">subkeys</span><span class="p">):</span>
                     <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">{})</span>
                     <span class="n">k</span> <span class="o">=</span> <span class="n">subkey</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
@@ -941,7 +950,7 @@
 
         <span class="k">return</span> <span class="n">result</span>
 
-    <span class="k">def</span> <span class="nf">evaluate_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a Result instance for the given regex match object&quot;&quot;&quot;</span>
         <span class="c1"># ok, figure the fixed fields we&#39;ve pulled out and type convert them</span>
         <span class="n">fixed_fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">groups</span><span class="p">())</span>
@@ -971,155 +980,155 @@
         <span class="c1"># and that&#39;s our result</span>
         <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">fixed_fields</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expand_named_fields</span><span class="p">(</span><span class="n">named_fields</span><span class="p">),</span> <span class="n">spans</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_regex_replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_regex_replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_generate_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># turn my _format attribute into the _expression attribute</span>
         <span class="n">e</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">PARSE_RE</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">part</span><span class="p">:</span>
                 <span class="k">continue</span>
-            <span class="k">elif</span> <span class="n">part</span> <span class="o">==</span> <span class="s1">&#39;{{&#39;</span><span class="p">:</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\{&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">part</span> <span class="o">==</span> <span class="s1">&#39;}}&#39;</span><span class="p">:</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\}&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">part</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;{&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">part</span> <span class="o">==</span> <span class="s2">&quot;{{&quot;</span><span class="p">:</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\{&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">part</span> <span class="o">==</span> <span class="s2">&quot;}}&quot;</span><span class="p">:</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\}&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">part</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;{&quot;</span><span class="p">:</span>
                 <span class="c1"># this will be a braces-delimited field to handle</span>
                 <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_field</span><span class="p">(</span><span class="n">part</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># just some text to match</span>
                 <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">REGEX_SAFETY</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_regex_replace</span><span class="p">,</span> <span class="n">part</span><span class="p">))</span>
-        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_to_group_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_group_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
         <span class="c1"># return a version of field which can be used as capture group, even</span>
         <span class="c1"># though it might contain &#39;.&#39;</span>
-        <span class="n">group</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
 
         <span class="c1"># make sure we don&#39;t collide (&quot;a.b&quot; colliding with &quot;a_b&quot;)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">while</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_to_name_map</span><span class="p">:</span>
             <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
-                <span class="n">group</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="s1">&#39;_&#39;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
-                <span class="n">group</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s2">&quot;_&quot;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;duplicated group name </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="p">,))</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;duplicated group name </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="p">,))</span>
 
         <span class="c1"># save off the mapping</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_group_to_name_map</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name_to_group_map</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span>
         <span class="k">return</span> <span class="n">group</span>
 
-    <span class="k">def</span> <span class="nf">_handle_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_handle_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
         <span class="c1"># first: lose the braces</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="c1"># now figure whether this is an anonymous or named field, and whether</span>
         <span class="c1"># there&#39;s any format specification</span>
-        <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="n">field</span> <span class="ow">and</span> <span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
-            <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
-                <span class="n">name</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+                <span class="n">name</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">name</span> <span class="o">=</span> <span class="n">field</span>
             <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name_to_group_map</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name_types</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">format</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">RepeatedNameError</span><span class="p">(</span>
                         <span class="s1">&#39;field type </span><span class="si">%r</span><span class="s1"> for field &quot;</span><span class="si">%s</span><span class="s1">&quot; &#39;</span>
-                        <span class="s1">&#39;does not match previous seen type </span><span class="si">%r</span><span class="s1">&#39;</span>
+                        <span class="s2">&quot;does not match previous seen type </span><span class="si">%r</span><span class="s2">&quot;</span>
                         <span class="o">%</span> <span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name_types</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
                     <span class="p">)</span>
                 <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name_to_group_map</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
                 <span class="c1"># match previously-seen value</span>
-                <span class="k">return</span> <span class="s1">&#39;(?P=</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">group</span>
+                <span class="k">return</span> <span class="s2">&quot;(?P=</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">group</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_group_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_name_types</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">format</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_named_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
             <span class="c1"># this will become a group, which must not contain dots</span>
-            <span class="n">wrap</span> <span class="o">=</span> <span class="s1">&#39;(?P&lt;</span><span class="si">%s</span><span class="s1">&gt;</span><span class="si">%%</span><span class="s1">s)&#39;</span> <span class="o">%</span> <span class="n">group</span>
+            <span class="n">wrap</span> <span class="o">=</span> <span class="s2">&quot;(?P&lt;</span><span class="si">%s</span><span class="s2">&gt;</span><span class="si">%%</span><span class="s2">s)&quot;</span> <span class="o">%</span> <span class="n">group</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fixed_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span><span class="p">)</span>
-            <span class="n">wrap</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">%s</span><span class="s1">)&#39;</span>
-            <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+            <span class="n">wrap</span> <span class="o">=</span> <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
                 <span class="nb">format</span> <span class="o">=</span> <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
             <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span>
 
         <span class="c1"># simplest case: no type specifier ({} or {name})</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">format</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">return</span> <span class="n">wrap</span> <span class="o">%</span> <span class="s1">&#39;.+?&#39;</span>
+            <span class="k">return</span> <span class="n">wrap</span> <span class="o">%</span> <span class="s2">&quot;.+?&quot;</span>
 
         <span class="c1"># decode the format specification</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="n">extract_format</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_types</span><span class="p">)</span>
 
         <span class="c1"># figure type conversions, if any</span>
-        <span class="nb">type</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
-        <span class="n">is_numeric</span> <span class="o">=</span> <span class="nb">type</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">in</span> <span class="s1">&#39;n</span><span class="si">%f</span><span class="s1">egdobh&#39;</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+        <span class="n">is_numeric</span> <span class="o">=</span> <span class="nb">type</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">in</span> <span class="s2">&quot;n</span><span class="si">%f</span><span class="s2">egdobh&quot;</span>
         <span class="k">if</span> <span class="nb">type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_types</span><span class="p">:</span>
             <span class="n">type_converter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_types</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">type_converter</span><span class="p">,</span> <span class="s1">&#39;pattern&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;.+?&#39;</span><span class="p">)</span>
-            <span class="n">regex_group_count</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">type_converter</span><span class="p">,</span> <span class="s1">&#39;regex_group_count&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">type_converter</span><span class="p">,</span> <span class="s2">&quot;pattern&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;.+?&quot;</span><span class="p">)</span>
+            <span class="n">regex_group_count</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">type_converter</span><span class="p">,</span> <span class="s2">&quot;regex_group_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">regex_group_count</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">regex_group_count</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="n">regex_group_count</span>
 
-            <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">type_converter</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;\d{1,3}([,.]\d</span><span class="si">{3}</span><span class="s1">)*&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;n&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;\d{1,3}([,.]\d</span><span class="si">{3}</span><span class="s2">)*&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_convert</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;(0[bB])?[01]+&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;(0[bB])?[01]+&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_convert</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;o&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;(0[oO])?[0-7]+&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;o&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;(0[oO])?[0-7]+&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_convert</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;(0[xX])?[0-9a-fA-F]+&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;(0[xX])?[0-9a-fA-F]+&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_convert</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;%&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\d+(\.\d+)?%&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;%&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+(\.\d+)?%&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">percentage</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\d+\.\d+&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;f&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+\.\d+&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\d+\.\d+&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+\.\d+&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\d+\.\d+[eE][-+]?\d+|nan|NAN|[-+]?inf|[-+]?INF&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;e&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+\.\d+[eE][-+]?\d+|nan|NAN|[-+]?inf|[-+]?INF&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;g&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\d+(\.\d+)?([eE][-+]?\d+)?|nan|NAN|[-+]?inf|[-+]?INF&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+(\.\d+)?([eE][-+]?\d+)?|nan|NAN|[-+]?inf|[-+]?INF&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">):</span>
-                <span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;{1,</span><span class="si">%s</span><span class="s1">}&#39;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="nb">format</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">):</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="s2">&quot;{1,</span><span class="si">%s</span><span class="s2">}&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="nb">format</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;+&#39;</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">d</span><span class="si">{w}</span><span class="s1">|0[xX][0-9a-fA-F]</span><span class="si">{w}</span><span class="s1">|0[bB][01]</span><span class="si">{w}</span><span class="s1">|0[oO][0-7]</span><span class="si">{w}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="s2">&quot;+&quot;</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">d</span><span class="si">{w}</span><span class="s2">|0[xX][0-9a-fA-F]</span><span class="si">{w}</span><span class="s2">|0[bB][01]</span><span class="si">{w}</span><span class="s2">|0[oO][0-7]</span><span class="si">{w}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_convert</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;ti&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d</span><span class="si">{4}</span><span class="s1">-\d\d-\d\d)((\s+|T)</span><span class="si">%s</span><span class="s1">)?(Z|\s*[-+]\d\d:?\d\d)?&#39;</span> <span class="o">%</span> <span class="n">TIME_PAT</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;ti&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\d</span><span class="si">{4}</span><span class="s2">-\d\d-\d\d)((\s+|T)</span><span class="si">%s</span><span class="s2">)?(Z|\s*[-+]\d\d:?\d\d)?&quot;</span> <span class="o">%</span> <span class="n">TIME_PAT</span>
             <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">ymd</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">7</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">7</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;tg&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d{1,2}[-/](\d{1,2}|</span><span class="si">%s</span><span class="s1">)[-/]\d</span><span class="si">{4}</span><span class="s1">)(\s+</span><span class="si">%s</span><span class="s1">)?</span><span class="si">%s</span><span class="s1">?</span><span class="si">%s</span><span class="s1">?&#39;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;tg&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\d{1,2}[-/](\d{1,2}|</span><span class="si">%s</span><span class="s2">)[-/]\d</span><span class="si">{4}</span><span class="s2">)(\s+</span><span class="si">%s</span><span class="s2">)?</span><span class="si">%s</span><span class="s2">?</span><span class="si">%s</span><span class="s2">?&quot;</span> <span class="o">%</span> <span class="p">(</span>
                 <span class="n">ALL_MONTHS_PAT</span><span class="p">,</span>
                 <span class="n">TIME_PAT</span><span class="p">,</span>
                 <span class="n">AM_PAT</span><span class="p">,</span>
@@ -1130,8 +1139,8 @@
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">dmy</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">am</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">9</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">9</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;ta&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;((\d{1,2}|</span><span class="si">%s</span><span class="s1">)[-/]\d{1,2}[-/]\d</span><span class="si">{4}</span><span class="s1">)(\s+</span><span class="si">%s</span><span class="s1">)?</span><span class="si">%s</span><span class="s1">?</span><span class="si">%s</span><span class="s1">?&#39;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;ta&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;((\d{1,2}|</span><span class="si">%s</span><span class="s2">)[-/]\d{1,2}[-/]\d</span><span class="si">{4}</span><span class="s2">)(\s+</span><span class="si">%s</span><span class="s2">)?</span><span class="si">%s</span><span class="s2">?</span><span class="si">%s</span><span class="s2">?&quot;</span> <span class="o">%</span> <span class="p">(</span>
                 <span class="n">ALL_MONTHS_PAT</span><span class="p">,</span>
                 <span class="n">TIME_PAT</span><span class="p">,</span>
                 <span class="n">AM_PAT</span><span class="p">,</span>
@@ -1142,9 +1151,9 @@
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">mdy</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">am</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">9</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">9</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;te&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;te&quot;</span><span class="p">:</span>
             <span class="c1"># this will allow microseconds through if they&#39;re present, but meh</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(</span><span class="si">%s</span><span class="s1">,\s+)?(\d{1,2}\s+</span><span class="si">%s</span><span class="s1">\s+\d</span><span class="si">{4}</span><span class="s1">)\s+</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">,\s+)?(\d{1,2}\s+</span><span class="si">%s</span><span class="s2">\s+\d</span><span class="si">{4}</span><span class="s2">)\s+</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
                 <span class="n">DAYS_PAT</span><span class="p">,</span>
                 <span class="n">MONTHS_PAT</span><span class="p">,</span>
                 <span class="n">TIME_PAT</span><span class="p">,</span>
@@ -1155,16 +1164,20 @@
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">dmy</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">8</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">8</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;th&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span>
             <span class="c1"># slight flexibility here from the stock Apache format</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d{1,2}[-/]</span><span class="si">%s</span><span class="s1">[-/]\d</span><span class="si">{4}</span><span class="s1">):</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">MONTHS_PAT</span><span class="p">,</span> <span class="n">TIME_PAT</span><span class="p">,</span> <span class="n">TZ_PAT</span><span class="p">,)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\d{1,2}[-/]</span><span class="si">%s</span><span class="s2">[-/]\d</span><span class="si">{4}</span><span class="s2">):</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">MONTHS_PAT</span><span class="p">,</span>
+                <span class="n">TIME_PAT</span><span class="p">,</span>
+                <span class="n">TZ_PAT</span><span class="p">,</span>
+            <span class="p">)</span>
             <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">dmy</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">6</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">6</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;tc&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(</span><span class="si">%s</span><span class="s1">)\s+</span><span class="si">%s</span><span class="s1">\s+(\d{1,2})\s+</span><span class="si">%s</span><span class="s1">\s+(\d</span><span class="si">{4}</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;tc&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)\s+</span><span class="si">%s</span><span class="s2">\s+(\d{1,2})\s+</span><span class="si">%s</span><span class="s2">\s+(\d</span><span class="si">{4}</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span>
                 <span class="n">DAYS_PAT</span><span class="p">,</span>
                 <span class="n">MONTHS_PAT</span><span class="p">,</span>
                 <span class="n">TIME_PAT</span><span class="p">,</span>
@@ -1174,15 +1187,15 @@
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">d_m_y</span><span class="o">=</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">8</span><span class="p">),</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">5</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">8</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;tt&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">?</span><span class="si">%s</span><span class="s1">?</span><span class="si">%s</span><span class="s1">?&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">TIME_PAT</span><span class="p">,</span> <span class="n">AM_PAT</span><span class="p">,</span> <span class="n">TZ_PAT</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;tt&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">?</span><span class="si">%s</span><span class="s2">?</span><span class="si">%s</span><span class="s2">?&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">TIME_PAT</span><span class="p">,</span> <span class="n">AM_PAT</span><span class="p">,</span> <span class="n">TZ_PAT</span><span class="p">)</span>
             <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">am</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">5</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">5</span>
-        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;ts&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(\s+)(\d+)(\s+)(\d{1,2}:\d{1,2}:\d{1,2})?&#39;</span> <span class="o">%</span> <span class="n">MONTHS_PAT</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;ts&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(\s+)(\d+)(\s+)(\d{1,2}:\d{1,2}:\d{1,2})?&quot;</span> <span class="o">%</span> <span class="n">MONTHS_PAT</span>
             <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_type_conversions</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
                 <span class="n">date_convert</span><span class="p">,</span> <span class="n">mm</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dd</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hms</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">5</span>
@@ -1190,35 +1203,35 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">5</span>
 
         <span class="k">elif</span> <span class="nb">type</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\</span><span class="si">%s</span><span class="s1">+&#39;</span> <span class="o">%</span> <span class="nb">type</span>
-        <span class="k">elif</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;precision&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">):</span>
-                <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;.{</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">}?&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">format</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">])</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\</span><span class="si">%s</span><span class="s2">+&quot;</span> <span class="o">%</span> <span class="nb">type</span>
+        <span class="k">elif</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;precision&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;.{</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">}?&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">format</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="p">[</span><span class="s2">&quot;precision&quot;</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;.{1,</span><span class="si">%s</span><span class="s1">}?&#39;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">):</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;.{</span><span class="si">%s</span><span class="s1">,}?&#39;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;.{1,</span><span class="si">%s</span><span class="s2">}?&quot;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">[</span><span class="s2">&quot;precision&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">format</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;.{</span><span class="si">%s</span><span class="s2">,}?&quot;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;.+?&#39;</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;.+?&quot;</span>
 
-        <span class="n">align</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="s1">&#39;align&#39;</span><span class="p">]</span>
-        <span class="n">fill</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">]</span>
+        <span class="n">align</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="s2">&quot;align&quot;</span><span class="p">]</span>
+        <span class="n">fill</span> <span class="o">=</span> <span class="nb">format</span><span class="p">[</span><span class="s2">&quot;fill&quot;</span><span class="p">]</span>
 
         <span class="c1"># handle some numeric-specific things like fill and sign</span>
         <span class="k">if</span> <span class="n">is_numeric</span><span class="p">:</span>
             <span class="c1"># prefix with something (align &quot;=&quot; trumps zero)</span>
-            <span class="k">if</span> <span class="n">align</span> <span class="o">==</span> <span class="s1">&#39;=&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">align</span> <span class="o">==</span> <span class="s2">&quot;=&quot;</span><span class="p">:</span>
                 <span class="c1"># special case - align &quot;=&quot; acts like the zero above but with</span>
                 <span class="c1"># configurable fill defaulting to &quot;0&quot;</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">fill</span><span class="p">:</span>
-                    <span class="n">fill</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
-                <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">*&#39;</span> <span class="o">%</span> <span class="n">fill</span> <span class="o">+</span> <span class="n">s</span>
+                    <span class="n">fill</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*&quot;</span> <span class="o">%</span> <span class="n">fill</span> <span class="o">+</span> <span class="n">s</span>
 
             <span class="c1"># allow numbers to be prefixed with a sign</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;[-+ ]?&#39;</span> <span class="o">+</span> <span class="n">s</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[-+ ]?&quot;</span> <span class="o">+</span> <span class="n">s</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">fill</span><span class="p">:</span>
-            <span class="n">fill</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
 
         <span class="c1"># Place into a group now - this captures the value we want to keep.</span>
         <span class="c1"># Everything else from now is just padding to be stripped off</span>
@@ -1226,82 +1239,82 @@
             <span class="n">s</span> <span class="o">=</span> <span class="n">wrap</span> <span class="o">%</span> <span class="n">s</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_group_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="nb">format</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">format</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">]:</span>
             <span class="c1"># all we really care about is that if the format originally</span>
             <span class="c1"># specified a width then there will probably be padding - without</span>
             <span class="c1"># an explicit alignment that&#39;ll mean right alignment with spaces</span>
             <span class="c1"># padding</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">align</span><span class="p">:</span>
-                <span class="n">align</span> <span class="o">=</span> <span class="s1">&#39;&gt;&#39;</span>
+                <span class="n">align</span> <span class="o">=</span> <span class="s2">&quot;&gt;&quot;</span>
 
-        <span class="k">if</span> <span class="n">fill</span> <span class="ow">in</span> <span class="s1">&#39;.\+?*[]()</span><span class="si">{}</span><span class="s1">^$&#39;</span><span class="p">:</span>
-            <span class="n">fill</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">fill</span>
+        <span class="k">if</span> <span class="n">fill</span> <span class="ow">in</span> <span class="s2">&quot;.\+?*[]()</span><span class="si">{}</span><span class="s2">^$&quot;</span><span class="p">:</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">fill</span>
 
         <span class="c1"># align &quot;=&quot; has been handled</span>
-        <span class="k">if</span> <span class="n">align</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">*&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fill</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">align</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">*</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fill</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">align</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">*</span><span class="si">%s%s</span><span class="s1">*&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fill</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">fill</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">align</span> <span class="o">==</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">*&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fill</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">align</span> <span class="o">==</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fill</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">align</span> <span class="o">==</span> <span class="s2">&quot;^&quot;</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*</span><span class="si">%s%s</span><span class="s2">*&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fill</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">fill</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">s</span>
 
 
-<span class="k">class</span> <span class="nc">Result</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Result</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The result of a parse() or search().</span>
 
 <span class="sd">    Fixed results may be looked up using result[index]. Named results may be</span>
 <span class="sd">    looked up using result[&#39;name&#39;].</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">named</span><span class="p">,</span> <span class="n">spans</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">named</span><span class="p">,</span> <span class="n">spans</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fixed</span> <span class="o">=</span> <span class="n">fixed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">named</span> <span class="o">=</span> <span class="n">named</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">spans</span> <span class="o">=</span> <span class="n">spans</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixed</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">named</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%r</span><span class="s1"> </span><span class="si">%r</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">named</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%r</span><span class="s2"> </span><span class="si">%r</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">named</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">Match</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Match</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The result of a parse() or search() if no results are generated.</span>
 
 <span class="sd">    This class is only used to expose internal used regex match objects</span>
 <span class="sd">    to the user and use them for external Parser.evaluate_result calls.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">parser</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">match</span> <span class="o">=</span> <span class="n">match</span>
 
-    <span class="k">def</span> <span class="nf">evaluate_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate results for this Match&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">evaluate_result</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">ResultIterator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ResultIterator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The result of a findall() operation.</span>
 
 <span class="sd">    Each element is a Result instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">endpos</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">endpos</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">parser</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">string</span> <span class="o">=</span> <span class="n">string</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">endpos</span> <span class="o">=</span> <span class="n">endpos</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_result</span> <span class="o">=</span> <span class="n">evaluate_result</span>
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">_search_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">endpos</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
@@ -1318,8 +1331,12 @@
 
 <div class="viewcode-block" id="parse">
 <a class="viewcode-back" href="../../module_docs/focal/parse_format.html#focal.parse_format.parse">[docs]</a>
-<span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
-    <span class="nb">format</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span>
+    <span class="nb">format</span><span class="p">,</span>
+    <span class="n">string</span><span class="p">,</span>
+    <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">evaluate_result</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Using &quot;format&quot; attempt to pull values from &quot;string&quot;.</span>
 
@@ -1353,7 +1370,7 @@
 
 <div class="viewcode-block" id="search">
 <a class="viewcode-back" href="../../module_docs/focal/parse_format.html#focal.parse_format.search">[docs]</a>
-<span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span>
     <span class="nb">format</span><span class="p">,</span>
     <span class="n">string</span><span class="p">,</span>
     <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -1397,7 +1414,7 @@
 
 <div class="viewcode-block" id="findall">
 <a class="viewcode-back" href="../../module_docs/focal/parse_format.html#focal.parse_format.findall">[docs]</a>
-<span class="k">def</span> <span class="nf">findall</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">findall</span><span class="p">(</span>
     <span class="nb">format</span><span class="p">,</span>
     <span class="n">string</span><span class="p">,</span>
     <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -1438,7 +1455,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compile</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">extra_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Parser instance to parse &quot;format&quot;.</span>
 
 <span class="sd">    The resultant Parser has a method .parse(string) which</span>
@@ -1457,11 +1474,11 @@
     <span class="k">return</span> <span class="n">Parser</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">extra_types</span><span class="o">=</span><span class="n">extra_types</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">match_re_for_fstring</span><span class="p">(</span><span class="n">fstring</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">match_re_for_fstring</span><span class="p">(</span><span class="n">fstring</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">compile</span><span class="p">(</span><span class="n">fstring</span><span class="p">)</span><span class="o">.</span><span class="n">_match_re</span>
 
 
-<span class="k">def</span> <span class="nf">search_re_for_fstring</span><span class="p">(</span><span class="n">fstring</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_re_for_fstring</span><span class="p">(</span><span class="n">fstring</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">compile</span><span class="p">(</span><span class="n">fstring</span><span class="p">)</span><span class="o">.</span><span class="n">_search_re</span>
 
 
