@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "focal"
-version = "0.1.9"
+version = "0.1.10"
 description = "Data Access Objects for local files"
 readme = "README.md"
 requires-python = ">=3.10"
