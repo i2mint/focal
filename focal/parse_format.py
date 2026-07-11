@@ -401,7 +401,6 @@ This code is copyright 2012-2017 Richard Jones <richard@python.org>
 See the end of the source file for the license of use.
 """
 
-
 __version__ = "1.9.0"
 
 # yes, I now have two problems
