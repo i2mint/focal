@@ -401,7 +401,6 @@ This code is copyright 2012-2017 Richard Jones <richard@python.org>
 See the end of the source file for the license of use.
 """
 
-from __future__ import absolute_import
 
 __version__ = "1.9.0"
 
@@ -419,7 +418,7 @@ log = logging.getLogger(__name__)
 
 
 def with_pattern(pattern, regex_group_count=None):
-    """Attach a regular expression pattern matcher to a custom type converter
+    r"""Attach a regular expression pattern matcher to a custom type converter
     function.
 
     This annotates the type converter with the :attr:`pattern` attribute.
@@ -500,7 +499,7 @@ class FixedTzOffset(tzinfo):
         self._name = name
 
     def __repr__(self):
-        return "<%s %s %s>" % (
+        return "<{} {} {}>".format(
             self.__class__.__name__,
             self._name,
             self._offset,
@@ -575,11 +574,11 @@ def date_convert(
         m = groups[mm]
         d = groups[dd]
     elif ymd is not None:
-        y, m, d = re.split("[-/\s]", groups[ymd])
+        y, m, d = re.split(r"[-/\s]", groups[ymd])
     elif mdy is not None:
-        m, d, y = re.split("[-/\s]", groups[mdy])
+        m, d, y = re.split(r"[-/\s]", groups[mdy])
     elif dmy is not None:
-        d, m, y = re.split("[-/\s]", groups[dmy])
+        d, m, y = re.split(r"[-/\s]", groups[dmy])
     elif d_m_y is not None:
         d, m, y = d_m_y
         d = groups[d]
@@ -661,7 +660,7 @@ class RepeatedNameError(ValueError):
 
 # note: {} are handled separately
 # note: I don't use r'' here because Sublime Text 2 syntax highlight has a fit
-REGEX_SAFETY = re.compile("([?\\\\.[\]()*+\^$!\|])")
+REGEX_SAFETY = re.compile("([?\\\\.[\\]()*+\\^$!\\|])")
 
 # allowed field types
 ALLOWED_TYPES = set(list("nbox%fFegwWdDsS") + ["t" + c for c in "ieahgcts"])
@@ -712,7 +711,7 @@ def extract_format(format, extra_types):
 PARSE_RE = re.compile(r"""({{|}}|{\w*(?:(?:\.\w+)|(?:\[[^\]]+\]))*(?::[^}]+)?})""")
 
 
-class Parser(object):
+class Parser:
     """Encapsulate a format string that may be used to parse other strings."""
 
     def __init__(self, format, extra_types=None, case_sensitive=False):
@@ -748,11 +747,11 @@ class Parser(object):
 
     def __repr__(self):
         if len(self._format) > 20:
-            return "<%s %r>" % (
+            return "<{} {!r}>".format(
                 self.__class__.__name__,
                 self._format[:17] + "...",
             )
-        return "<%s %r>" % (self.__class__.__name__, self._format)
+        return "<{} {!r}>".format(self.__class__.__name__, self._format)
 
     @property
     def _search_re(self):
@@ -892,7 +891,7 @@ class Parser(object):
             named_fields[korig] = value
 
         # now figure the match spans
-        spans = dict((n, m.span(name_map[n])) for n in named_fields)
+        spans = {n: m.span(name_map[n]) for n in named_fields}
         spans.update((i, m.span(n + 1)) for i, n in enumerate(self._fixed_fields))
 
         # and that's our result
@@ -933,7 +932,7 @@ class Parser(object):
             elif "_" in field:
                 group = field.replace("_", "_" * n)
             else:
-                raise KeyError("duplicated group name %r" % (field,))
+                raise KeyError("duplicated group name {!r}".format(field))
 
         # save off the mapping
         self._group_to_name_map[group] = field
@@ -999,7 +998,7 @@ class Parser(object):
 
             self._type_conversions[group] = f
         elif type == "n":
-            s = "\d{1,3}([,.]\d{3})*"
+            s = r"\d{1,3}([,.]\d{3})*"
             self._group_index += 1
             self._type_conversions[group] = int_convert(10)
         elif type == "b":
@@ -1046,7 +1045,7 @@ class Parser(object):
             )
             self._group_index += 7
         elif type == "tg":
-            s = r"(\d{1,2}[-/](\d{1,2}|%s)[-/]\d{4})(\s+%s)?%s?%s?" % (
+            s = r"(\d{{1,2}}[-/](\d{{1,2}}|{})[-/]\d{{4}})(\s+{})?{}?{}?".format(
                 ALL_MONTHS_PAT,
                 TIME_PAT,
                 AM_PAT,
@@ -1058,7 +1057,7 @@ class Parser(object):
             )
             self._group_index += 9
         elif type == "ta":
-            s = r"((\d{1,2}|%s)[-/]\d{1,2}[-/]\d{4})(\s+%s)?%s?%s?" % (
+            s = r"((\d{{1,2}}|{})[-/]\d{{1,2}}[-/]\d{{4}})(\s+{})?{}?{}?".format(
                 ALL_MONTHS_PAT,
                 TIME_PAT,
                 AM_PAT,
@@ -1071,7 +1070,7 @@ class Parser(object):
             self._group_index += 9
         elif type == "te":
             # this will allow microseconds through if they're present, but meh
-            s = r"(%s,\s+)?(\d{1,2}\s+%s\s+\d{4})\s+%s%s" % (
+            s = r"({},\s+)?(\d{{1,2}}\s+{}\s+\d{{4}})\s+{}{}".format(
                 DAYS_PAT,
                 MONTHS_PAT,
                 TIME_PAT,
@@ -1084,7 +1083,7 @@ class Parser(object):
             self._group_index += 8
         elif type == "th":
             # slight flexibility here from the stock Apache format
-            s = r"(\d{1,2}[-/]%s[-/]\d{4}):%s%s" % (
+            s = r"(\d{{1,2}}[-/]{}[-/]\d{{4}}):{}{}".format(
                 MONTHS_PAT,
                 TIME_PAT,
                 TZ_PAT,
@@ -1095,7 +1094,7 @@ class Parser(object):
             )
             self._group_index += 6
         elif type == "tc":
-            s = r"(%s)\s+%s\s+(\d{1,2})\s+%s\s+(\d{4})" % (
+            s = r"({})\s+{}\s+(\d{{1,2}})\s+{}\s+(\d{{4}})".format(
                 DAYS_PAT,
                 MONTHS_PAT,
                 TIME_PAT,
@@ -1106,7 +1105,7 @@ class Parser(object):
             )
             self._group_index += 8
         elif type == "tt":
-            s = r"%s?%s?%s?" % (TIME_PAT, AM_PAT, TZ_PAT)
+            s = r"{}?{}?{}?".format(TIME_PAT, AM_PAT, TZ_PAT)
             n = self._group_index
             self._type_conversions[group] = partial(
                 date_convert, hms=n + 1, am=n + 4, tz=n + 5
@@ -1124,7 +1123,7 @@ class Parser(object):
             s = r"\%s+" % type
         elif format.get("precision"):
             if format.get("width"):
-                s = ".{%s,%s}?" % (format["width"], format["precision"])
+                s = ".{{{},{}}}?".format(format["width"], format["precision"])
             else:
                 s = ".{1,%s}?" % format["precision"]
         elif format.get("width"):
@@ -1165,21 +1164,21 @@ class Parser(object):
             if not align:
                 align = ">"
 
-        if fill in ".\+?*[](){}^$":
+        if fill in r".\+?*[](){}^$":
             fill = "\\" + fill
 
         # align "=" has been handled
         if align == "<":
-            s = "%s%s*" % (s, fill)
+            s = "{}{}*".format(s, fill)
         elif align == ">":
-            s = "%s*%s" % (fill, s)
+            s = "{}*{}".format(fill, s)
         elif align == "^":
-            s = "%s*%s%s*" % (fill, s, fill)
+            s = "{}*{}{}*".format(fill, s, fill)
 
         return s
 
 
-class Result(object):
+class Result:
     """The result of a parse() or search().
 
     Fixed results may be looked up using result[index]. Named results may be
@@ -1197,10 +1196,10 @@ class Result(object):
         return self.named[item]
 
     def __repr__(self):
-        return "<%s %r %r>" % (self.__class__.__name__, self.fixed, self.named)
+        return "<{} {!r} {!r}>".format(self.__class__.__name__, self.fixed, self.named)
 
 
-class Match(object):
+class Match:
     """The result of a parse() or search() if no results are generated.
 
     This class is only used to expose internal used regex match objects
@@ -1216,7 +1215,7 @@ class Match(object):
         return self.parser.evaluate_result(self.match)
 
 
-class ResultIterator(object):
+class ResultIterator:
     """The result of a findall() operation.
 
     Each element is a Result instance.
