@@ -91,6 +91,7 @@ convention = "google"
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = [
+    "focal",
     "tests",
 ]
 doctest_optionflags = [
