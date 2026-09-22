@@ -1,4 +1,4 @@
-> built 2026-09-22 14:25 UTC from efda78b (master) · focal 0.1.12. Details: build_info.json
+> built 2026-09-22 14:40 UTC from 722de15 (master) · focal 0.1.13. Details: build_info.json
 
 # index.html.md
 
@@ -771,16 +771,18 @@ is equivalent to:
 
 # About this build
 
-This documentation was built on **2026-09-22 14:25 UTC** from commit <a href="https://github.com/i2mint/focal/commit/efda78bc44bbc24c80a86ff8dfe24a24a0f70ed2"><code>efda78b</code></a> on branch <code>master</code>, for **focal 0.1.12** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-09-22 14:40 UTC** from commit <a href="https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2"><code>722de15</code></a> on branch <code>master</code>, for **focal 0.1.13** (from <code>pyproject.toml</code>).
 
-#### NOTE
-Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
+#### WARNING
+The documentation and the package may be misaligned:
+
+- The documented version (0.1.13) is behind the latest release on PyPI (0.1.14): `pip install focal` gives newer code than these docs describe.
 
 ## Source
 
 |                     |                                                                                                                                                     |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/focal/commit/efda78bc44bbc24c80a86ff8dfe24a24a0f70ed2"><code>efda78bc44bbc24c80a86ff8dfe24a24a0f70ed2</code></a> |
+| Commit              | <a href="https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2"><code>722de15b907f616208f6a5f28fa0c796e516e3c2</code></a> |
 | Branch              | <code>master</code>                                                                                                                                 |
 | Tags at this commit | none                                                                                                                                                |
 | Working tree        | clean                                                                                                                                               |
@@ -791,9 +793,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/focal</code>                                                                  |
-| Run          | <a href="https://github.com/i2mint/focal/actions/runs/35740030582">35740030582</a>         |
+| Run          | <a href="https://github.com/i2mint/focal/actions/runs/35740451345">35740451345</a>         |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>efda78bc44bbc24c80a86ff8dfe24a24a0f70ed2</code> (in the history of the built commit) |
+| Event commit | <code>722de15b907f616208f6a5f28fa0c796e516e3c2</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -818,13 +820,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/focal/0.1.12/">0.1.12</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/focal/0.1.14/">0.1.14</a>, newer than the documented version (0.1.13).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/focal && cd focal
-git checkout efda78bc44bbc24c80a86ff8dfe24a24a0f70ed2
+git checkout 722de15b907f616208f6a5f28fa0c796e516e3c2
 pip install "epythet==0.2.12"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

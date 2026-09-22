@@ -10,7 +10,7 @@
 - [focal](_autosummary/focal.html.md): Data Object Layers for local files
 - [focal.extension_store](_autosummary/focal.extension_store.html.md): Stores that are extension-aware when reading and writing.
 - [focal.parse_format](_autosummary/focal.parse_format.html.md): Modified from https://github.com/r1chardj0n3s/parse
-- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-09-22 14:25 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-09-22 14:40 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
 
 ## Optional
 
