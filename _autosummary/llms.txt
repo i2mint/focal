@@ -1,0 +1,14 @@
+# focal
+
+> Data Access Objects for local files
+
+
+## Pages in this subsection
+
+- [focal](focal.html.md): Data Object Layers for local files
+- [focal.extension_store](focal.extension_store.html.md): Stores that are extension-aware when reading and writing.
+- [focal.parse_format](focal.parse_format.html.md): Modified from https://github.com/r1chardj0n3s/parse
+
+## Optional
+
+- [Top-level llms.txt](../llms.txt): Complete documentation index.

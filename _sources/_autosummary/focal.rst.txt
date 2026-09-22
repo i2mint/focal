@@ -1,0 +1,14 @@
+﻿focal
+=====
+
+.. automodule:: focal
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   extension_store
+   parse_format

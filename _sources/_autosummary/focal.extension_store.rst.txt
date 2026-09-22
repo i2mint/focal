@@ -1,0 +1,20 @@
+focal.extension\_store
+======================
+
+.. automodule:: focal.extension_store
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_extension
+      make_conversion_for_obj
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      LocalBinaryStore
+      MultiFileStore
+   

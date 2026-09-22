@@ -1,151 +1,243 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html lang="en" data-accent-color="violet" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to focal’s documentation! &mdash; focal 0.1.11 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>focal</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API reference" href="api.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="focal"/>
+    <meta name="twitter:card" content="summary"/>
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=1e825a29"></script>
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt" type="text/markdown">
+</head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="#">
+      
+      
+      <strong>focal</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/i2mint/focal" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/focal.html">focal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/focal.extension_store.html">focal.extension_store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/focal.parse_format.html">focal.parse_format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#">focal</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#quick-store">quick store</a></li>
+<li><a class="reference internal" href="#iterate-over-files">iterate over files</a></li>
+<li><a class="reference internal" href="#bytes-contents-of-the-file">bytes contents of the file</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="#"><span itemprop="name">focal</span></a>
+        <meta itemprop="position" content="1" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <!-- generated by epythet -->
+<section id="focal">
+<h1>focal<a class="headerlink" href="#focal" title="Link to this heading">#</a></h1>
+<p>Data Access Objects for local files.</p>
+</section>
+<section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
+<section id="quick-store">
+<h2>quick store<a class="headerlink" href="#quick-store" title="Link to this heading">#</a></h2>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; from py2store import QuickStore
+</span><span data-line="2">&gt;&gt;&gt;
+</span><span data-line="3">&gt;&gt;&gt; store = QuickStore()  # will print what (tmp) rootdir it is choosing
+</span><span data-line="4">&gt;&gt;&gt; # Write something and then read it out again
+</span><span data-line="5">&gt;&gt;&gt; store['foo'] = 'baz'
+</span><span data-line="6">&gt;&gt;&gt; 'foo' in store  # do you have the key 'foo' in your store?
+</span><span data-line="7">True
+</span><span data-line="8">&gt;&gt;&gt; store['foo']  # what is the value for 'foo'?
+</span><span data-line="9">'baz'
+</span><span data-line="10">&gt;&gt;&gt;
+</span><span data-line="11">&gt;&gt;&gt; # Okay, it behaves like a dict, but go have a look in your file system,  
+</span><span data-line="12">&gt;&gt;&gt; # and see that there is now a file in the rootdir, named 'foo'!
+</span><span data-line="13">&gt;&gt;&gt; 
+</span><span data-line="14">&gt;&gt;&gt; # Write something more complicated
+</span><span data-line="15">&gt;&gt;&gt; store['hello/world'] = [1, 'flew', {'over': 'a', "cuckoo's": map}]
+</span><span data-line="16">&gt;&gt;&gt; stored_val = store['hello/world']
+</span><span data-line="17">&gt;&gt;&gt; stored_val == [1, 'flew', {'over': 'a', "cuckoo's": map}]  # was it retrieved correctly?
+</span><span data-line="18">True
+</span><span data-line="19">&gt;&gt;&gt;
+</span><span data-line="20">&gt;&gt;&gt; # how many items do you have now?
+</span><span data-line="21">&gt;&gt;&gt; assert len(store) &gt;= 2  # can't be sure there were no elements before, so can't assert == 2
+</span><span data-line="22">&gt;&gt;&gt; 
+</span><span data-line="23">&gt;&gt;&gt; # delete the stuff you've written
+</span><span data-line="24">&gt;&gt;&gt; del store['foo']
+</span><span data-line="25">&gt;&gt;&gt; del store['hello/world']
+</span></pre></div>
+</div>
+</section>
+<section id="iterate-over-files">
+<h2>iterate over files<a class="headerlink" href="#iterate-over-files" title="Link to this heading">#</a></h2>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; import os
+</span><span data-line="2">&gt;&gt;&gt; filepath = __file__  # path to this module
+</span><span data-line="3">&gt;&gt;&gt; dirpath = os.path.dirname(__file__)  # path of the directory where I (the module file) am
+</span><span data-line="4">&gt;&gt;&gt; s = FileCollection(dirpath, max_levels=0)
+</span><span data-line="5">&gt;&gt;&gt;
+</span><span data-line="6">&gt;&gt;&gt; files_in_this_dir = list(s)
+</span><span data-line="7">&gt;&gt;&gt; filepath in files_in_this_dir
+</span><span data-line="8">True
+</span></pre></div>
+</div>
+</section>
+<section id="bytes-contents-of-the-file">
+<h2>bytes contents of the file<a class="headerlink" href="#bytes-contents-of-the-file" title="Link to this heading">#</a></h2>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; import os
+</span><span data-line="2">&gt;&gt;&gt; filepath = __file__
+</span><span data-line="3">&gt;&gt;&gt; dirpath = os.path.dirname(__file__)  # path of the directory where I (the module file) am
+</span><span data-line="4">&gt;&gt;&gt; s = FileBytesReader(dirpath, max_levels=0)
+</span><span data-line="5">&gt;&gt;&gt;
+</span><span data-line="6">&gt;&gt;&gt; ####### Get the first 9 characters (as bytes) of this module #####################
+</span><span data-line="7">&gt;&gt;&gt; s[filepath][:9]
+</span><span data-line="8">b'import os'
+</span><span data-line="9">&gt;&gt;&gt;
+</span><span data-line="10">&gt;&gt;&gt; ####### Test key validation #####################
+</span><span data-line="11">&gt;&gt;&gt; s['not_a_valid_key']  # this key is not valid since not under the dirpath folder
+</span><span data-line="12">Traceback (most recent call last):
+</span><span data-line="13">    ...
+</span><span data-line="14">filesys.KeyValidationError: 'Key not valid (usually because does not exist or access not permitted): not_a_valid_key'
+</span><span data-line="15">&gt;&gt;&gt;
+</span><span data-line="16">&gt;&gt;&gt; ####### Test further exceptions (that should be wrapped in KeyError) #####################
+</span><span data-line="17">&gt;&gt;&gt; # this key is valid, since under dirpath, but the file itself doesn't exist (hopefully for this test)
+</span><span data-line="18">&gt;&gt;&gt; non_existing_file = os.path.join(dirpath, 'non_existing_file')
+</span><span data-line="19">&gt;&gt;&gt; try:
+</span><span data-line="20">...     s[non_existing_file]
+</span><span data-line="21">... except KeyError:
+</span><span data-line="22">...     print("KeyError (not FileNotFoundError) was raised.")
+</span><span data-line="23">KeyError (not FileNotFoundError) was raised.
+</span></pre></div>
+</div>
+<p class="epythet-aggregates">This documentation as a single file: <a href="focal.md">focal.md</a> (Markdown, for agents).</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-09-22 14:25 UTC from <a href="https://github.com/i2mint/focal/commit/efda78bc44bbc24c80a86ff8dfe24a24a0f70ed2">efda78b</a> (master) · focal 0.1.12 · <a href="about-this-build.html">about this build</a></p>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-next">
+    <a href="api.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">API reference</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/i2mint/focal" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="_static/documentation_options.js?v=297ad043"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="focal" href="module_docs/focal.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="#" class="icon icon-home">
-            focal
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal.html">focal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal/extension_store.html">focal.extension_store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal/parse_format.html">focal.parse_format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal/tests/test_extension_store.html">focal.tests.test_extension_store</a></li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">focal</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to focal’s documentation!</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="welcome-to-focal-s-documentation">
-<h1>Welcome to focal’s documentation!<a class="headerlink" href="#welcome-to-focal-s-documentation" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal.html">focal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal/extension_store.html">focal.extension_store</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/extension_store.html#focal.extension_store.LocalBinaryStore"><code class="docutils literal notranslate"><span class="pre">LocalBinaryStore</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/extension_store.html#focal.extension_store.MultiFileStore"><code class="docutils literal notranslate"><span class="pre">MultiFileStore</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/extension_store.html#focal.extension_store.string_to_bytes"><code class="docutils literal notranslate"><span class="pre">string_to_bytes()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/extension_store.html#focal.extension_store.text_byte_to_string"><code class="docutils literal notranslate"><span class="pre">text_byte_to_string()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal/parse_format.html">focal.parse_format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#format-syntax">Format Syntax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#format-specification">Format Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#result-and-match-objects">Result and Match Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#custom-type-conversions">Custom Type Conversions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#potential-gotchas">Potential Gotchas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#focal.parse_format.findall"><code class="docutils literal notranslate"><span class="pre">findall()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#focal.parse_format.parse"><code class="docutils literal notranslate"><span class="pre">parse()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#focal.parse_format.search"><code class="docutils literal notranslate"><span class="pre">search()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/focal/parse_format.html#focal.parse_format.with_pattern"><code class="docutils literal notranslate"><span class="pre">with_pattern()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/focal/tests/test_extension_store.html">focal.tests.test_extension_store</a></li>
-</ul>
-</div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-<p>Release: 0.1.11</p>
-<p>Last change: Jul 30, 2026</p>
-</section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="module_docs/focal.html" class="btn btn-neutral float-right" title="focal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+      <script src="_static/copybutton.js?v=fd10adb8"></script>
+      <script src="_static/shibuya.js?v=50760d75"></script></body>
 </html>

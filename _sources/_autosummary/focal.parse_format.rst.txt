@@ -1,0 +1,15 @@
+focal.parse\_format
+===================
+
+.. automodule:: focal.parse_format
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      parse
+      search
+      findall
+      with_pattern
+   
