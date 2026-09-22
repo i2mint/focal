@@ -54,3 +54,20 @@ def test_store(
         f" \n{retrieved=}"
         f"\n{object_to_test=}"
     )
+
+
+def test_is_valid_key_agrees_with_iteration():
+    """Regression test for i2mint/focal#5 (dol#83 key-delegation bug class).
+
+    ``is_valid_key``/``validate_key`` must agree with what the store actually
+    iterates and holds -- pins the i2mint/dol#85 fix (``mk_relative_path_store``
+    installing key-mapping ``is_valid_key``/``validate_key``) against a future
+    regression.
+    """
+    import tempfile
+
+    d = MultiFileStore(tempfile.mkdtemp())
+    d["x.json"] = {"a": 1}
+    for k in d:
+        assert d.is_valid_key(k), f"{k} is in the store but is_valid_key says no"
+        d.validate_key(k)  # must not raise
