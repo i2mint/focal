@@ -1,39 +1,39 @@
 {
   "schema_version": 1,
-  "built_at": "2026-09-22T14:40:35Z",
+  "built_at": "2026-10-13T16:14:54Z",
   "package": {
     "name": "focal",
-    "version": "0.1.13",
+    "version": "0.1.14",
     "display_name": "focal",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "722de15b907f616208f6a5f28fa0c796e516e3c2",
-    "short_commit": "722de15",
+    "commit": "17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b",
+    "short_commit": "17c62ea",
     "branch": "master",
     "tags": [],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/focal",
-    "commit_url": "https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2",
+    "commit_url": "https://github.com/i2mint/focal/commit/17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/focal",
-    "sha": "722de15b907f616208f6a5f28fa0c796e516e3c2",
+    "sha": "17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "35740451345",
-    "run_url": "https://github.com/i2mint/focal/actions/runs/35740451345",
+    "run_id": "38428779898",
+    "run_url": "https://github.com/i2mint/focal/actions/runs/38428779898",
     "server_url": "https://github.com"
   },
   "tools": {
-    "epythet": "0.2.12",
+    "epythet": "0.2.17",
     "sphinx": "9.1.0",
     "docutils": "0.22.4",
-    "python": "3.12.14"
+    "python": "3.12.15"
   },
   "config": {
     "theme": "auto",
@@ -60,16 +60,16 @@
   },
   "pypi": {
     "checked": true,
-    "latest": "0.1.14",
+    "latest": "0.1.15",
     "relation": "behind",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/focal && cd focal\ngit checkout 722de15b907f616208f6a5f28fa0c796e516e3c2\npip install \"epythet==0.2.12\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/focal && cd focal\ngit checkout 17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b\npip install \"epythet==0.2.17\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
     "aligned": false,
     "notes": [
-      "The documented version (0.1.13) is behind the latest release on PyPI (0.1.14): `pip install focal` gives newer code than these docs describe."
+      "The documented version (0.1.14) is behind the latest release on PyPI (0.1.15): `pip install focal` gives newer code than these docs describe."
     ]
   }
 }

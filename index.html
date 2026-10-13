@@ -85,9 +85,9 @@ data-aria-dark="Switch to auto color mode">
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
 <li><a class="reference internal" href="#">focal</a></li>
 <li><a class="reference internal" href="#examples">Examples</a><ul>
-<li><a class="reference internal" href="#quick-store">quick store</a></li>
-<li><a class="reference internal" href="#iterate-over-files">iterate over files</a></li>
-<li><a class="reference internal" href="#bytes-contents-of-the-file">bytes contents of the file</a></li>
+<li><a class="reference internal" href="#a-dict-like-view-of-a-folder">a dict-like view of a folder</a></li>
+<li><a class="reference internal" href="#bytes-contents-of-a-file-and-key-validation">bytes contents of a file, and key validation</a></li>
+<li><a class="reference internal" href="#serialize-by-extension">serialize by extension</a></li>
 </ul>
 </li>
 </ul>
@@ -120,86 +120,66 @@ data-aria-dark="Switch to auto color mode">
 <section id="focal">
 <h1>focal<a class="headerlink" href="#focal" title="Link to this heading">#</a></h1>
 <p>Data Access Objects for local files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">focal</span></code> re-exports the file-system stores of <a class="reference external" href="https://github.com/i2mint/dol"><code class="docutils literal notranslate"><span class="pre">dol</span></code></a> (<code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">TextFiles</span></code>, <code class="docutils literal notranslate"><span class="pre">PickleFiles</span></code>, …) and adds <code class="docutils literal notranslate"><span class="pre">multi_extension_wrap</span></code>, which serializes by file extension.</p>
 </section>
 <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
-<section id="quick-store">
-<h2>quick store<a class="headerlink" href="#quick-store" title="Link to this heading">#</a></h2>
-<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; from py2store import QuickStore
-</span><span data-line="2">&gt;&gt;&gt;
-</span><span data-line="3">&gt;&gt;&gt; store = QuickStore()  # will print what (tmp) rootdir it is choosing
-</span><span data-line="4">&gt;&gt;&gt; # Write something and then read it out again
-</span><span data-line="5">&gt;&gt;&gt; store['foo'] = 'baz'
-</span><span data-line="6">&gt;&gt;&gt; 'foo' in store  # do you have the key 'foo' in your store?
-</span><span data-line="7">True
-</span><span data-line="8">&gt;&gt;&gt; store['foo']  # what is the value for 'foo'?
-</span><span data-line="9">'baz'
-</span><span data-line="10">&gt;&gt;&gt;
-</span><span data-line="11">&gt;&gt;&gt; # Okay, it behaves like a dict, but go have a look in your file system,  
-</span><span data-line="12">&gt;&gt;&gt; # and see that there is now a file in the rootdir, named 'foo'!
-</span><span data-line="13">&gt;&gt;&gt; 
-</span><span data-line="14">&gt;&gt;&gt; # Write something more complicated
-</span><span data-line="15">&gt;&gt;&gt; store['hello/world'] = [1, 'flew', {'over': 'a', "cuckoo's": map}]
-</span><span data-line="16">&gt;&gt;&gt; stored_val = store['hello/world']
-</span><span data-line="17">&gt;&gt;&gt; stored_val == [1, 'flew', {'over': 'a', "cuckoo's": map}]  # was it retrieved correctly?
-</span><span data-line="18">True
-</span><span data-line="19">&gt;&gt;&gt;
-</span><span data-line="20">&gt;&gt;&gt; # how many items do you have now?
-</span><span data-line="21">&gt;&gt;&gt; assert len(store) &gt;= 2  # can't be sure there were no elements before, so can't assert == 2
-</span><span data-line="22">&gt;&gt;&gt; 
-</span><span data-line="23">&gt;&gt;&gt; # delete the stuff you've written
-</span><span data-line="24">&gt;&gt;&gt; del store['foo']
-</span><span data-line="25">&gt;&gt;&gt; del store['hello/world']
-</span></pre></div>
-</div>
-</section>
-<section id="iterate-over-files">
-<h2>iterate over files<a class="headerlink" href="#iterate-over-files" title="Link to this heading">#</a></h2>
-<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; import os
-</span><span data-line="2">&gt;&gt;&gt; filepath = __file__  # path to this module
-</span><span data-line="3">&gt;&gt;&gt; dirpath = os.path.dirname(__file__)  # path of the directory where I (the module file) am
-</span><span data-line="4">&gt;&gt;&gt; s = FileCollection(dirpath, max_levels=0)
-</span><span data-line="5">&gt;&gt;&gt;
-</span><span data-line="6">&gt;&gt;&gt; files_in_this_dir = list(s)
-</span><span data-line="7">&gt;&gt;&gt; filepath in files_in_this_dir
+<p>The examples below run as doctests (<code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">tests/test_readme.py</span></code>).</p>
+<section id="a-dict-like-view-of-a-folder">
+<h2>a dict-like view of a folder<a class="headerlink" href="#a-dict-like-view-of-a-folder" title="Link to this heading">#</a></h2>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; import os, tempfile
+</span><span data-line="2">&gt;&gt;&gt; from focal import Files, TextFiles
+</span><span data-line="3">&gt;&gt;&gt;
+</span><span data-line="4">&gt;&gt;&gt; rootdir = tempfile.mkdtemp()
+</span><span data-line="5">&gt;&gt;&gt; store = Files(rootdir)  # keys are relative paths, values are bytes
+</span><span data-line="6">&gt;&gt;&gt; store['foo'] = b'baz'
+</span><span data-line="7">&gt;&gt;&gt; 'foo' in store
 </span><span data-line="8">True
+</span><span data-line="9">&gt;&gt;&gt; store['foo']
+</span><span data-line="10">b'baz'
+</span><span data-line="11">&gt;&gt;&gt; os.listdir(rootdir)  # it is a real file
+</span><span data-line="12">['foo']
+</span><span data-line="13">&gt;&gt;&gt; texts = TextFiles(rootdir)  # same folder, values are str
+</span><span data-line="14">&gt;&gt;&gt; texts['foo']
+</span><span data-line="15">'baz'
+</span><span data-line="16">&gt;&gt;&gt; del store['foo']
+</span><span data-line="17">
 </span></pre></div>
 </div>
 </section>
-<section id="bytes-contents-of-the-file">
-<h2>bytes contents of the file<a class="headerlink" href="#bytes-contents-of-the-file" title="Link to this heading">#</a></h2>
-<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; import os
-</span><span data-line="2">&gt;&gt;&gt; filepath = __file__
-</span><span data-line="3">&gt;&gt;&gt; dirpath = os.path.dirname(__file__)  # path of the directory where I (the module file) am
-</span><span data-line="4">&gt;&gt;&gt; s = FileBytesReader(dirpath, max_levels=0)
-</span><span data-line="5">&gt;&gt;&gt;
-</span><span data-line="6">&gt;&gt;&gt; ####### Get the first 9 characters (as bytes) of this module #####################
-</span><span data-line="7">&gt;&gt;&gt; s[filepath][:9]
-</span><span data-line="8">b'import os'
-</span><span data-line="9">&gt;&gt;&gt;
-</span><span data-line="10">&gt;&gt;&gt; ####### Test key validation #####################
-</span><span data-line="11">&gt;&gt;&gt; s['not_a_valid_key']  # this key is not valid since not under the dirpath folder
-</span><span data-line="12">Traceback (most recent call last):
-</span><span data-line="13">    ...
-</span><span data-line="14">filesys.KeyValidationError: 'Key not valid (usually because does not exist or access not permitted): not_a_valid_key'
-</span><span data-line="15">&gt;&gt;&gt;
-</span><span data-line="16">&gt;&gt;&gt; ####### Test further exceptions (that should be wrapped in KeyError) #####################
-</span><span data-line="17">&gt;&gt;&gt; # this key is valid, since under dirpath, but the file itself doesn't exist (hopefully for this test)
-</span><span data-line="18">&gt;&gt;&gt; non_existing_file = os.path.join(dirpath, 'non_existing_file')
-</span><span data-line="19">&gt;&gt;&gt; try:
-</span><span data-line="20">...     s[non_existing_file]
-</span><span data-line="21">... except KeyError:
-</span><span data-line="22">...     print("KeyError (not FileNotFoundError) was raised.")
-</span><span data-line="23">KeyError (not FileNotFoundError) was raised.
+<section id="bytes-contents-of-a-file-and-key-validation">
+<h2>bytes contents of a file, and key validation<a class="headerlink" href="#bytes-contents-of-a-file-and-key-validation" title="Link to this heading">#</a></h2>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;&gt;&gt; import os, tempfile
+</span><span data-line="2">&gt;&gt;&gt; from focal import Files
+</span><span data-line="3">&gt;&gt;&gt;
+</span><span data-line="4">&gt;&gt;&gt; rootdir = tempfile.mkdtemp()
+</span><span data-line="5">&gt;&gt;&gt; s = Files(rootdir)
+</span><span data-line="6">&gt;&gt;&gt; s['hello.txt'] = b'import os'
+</span><span data-line="7">&gt;&gt;&gt; s['hello.txt'][:6]
+</span><span data-line="8">b'import'
+</span><span data-line="9">&gt;&gt;&gt; s['../escape']  # keys outside the root folder are refused
+</span><span data-line="10">Traceback (most recent call last):
+</span><span data-line="11">    ...
+</span><span data-line="12">dol.filesys.KeyValidationError: ...
+</span><span data-line="13">&gt;&gt;&gt; try:
+</span><span data-line="14">...     s['no_such_file']
+</span><span data-line="15">... except KeyError:
+</span><span data-line="16">...     print("KeyError (not FileNotFoundError) was raised.")
+</span><span data-line="17">KeyError (not FileNotFoundError) was raised.
+</span><span data-line="18">
 </span></pre></div>
 </div>
+</section>
+<section id="serialize-by-extension">
+<h2>serialize by extension<a class="headerlink" href="#serialize-by-extension" title="Link to this heading">#</a></h2>
+<p>See <code class="docutils literal notranslate"><span class="pre">focal.extension_store.multi_extension_wrap</span></code>.</p>
 <p class="epythet-aggregates">This documentation as a single file: <a href="focal.md">focal.md</a> (Markdown, for agents).</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
 </section>
 
-<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-09-22 14:40 UTC from <a href="https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2">722de15</a> (master) · focal 0.1.13 · <a href="about-this-build.html">about this build</a></p>
+<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-10-13 16:14 UTC from <a href="https://github.com/i2mint/focal/commit/17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b">17c62ea</a> (master) · focal 0.1.14 · <a href="about-this-build.html">about this build</a></p>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
@@ -234,7 +214,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="_static/documentation_options.js?v=8d02545a"></script>
+      <script src="_static/documentation_options.js?v=468bc497"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>

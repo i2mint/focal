@@ -1,4 +1,4 @@
-> built 2026-09-22 14:40 UTC from 722de15 (master) · focal 0.1.13. Details: build_info.json
+> built 2026-10-13 16:14 UTC from 17c62ea (master) · focal 0.1.14. Details: build_info.json
 
 # index.html.md
 
@@ -8,78 +8,60 @@
 
 Data Access Objects for local files.
 
+`focal` re-exports the file-system stores of [`dol`](https://github.com/i2mint/dol) (`Files`, `TextFiles`, `PickleFiles`, …) and adds `multi_extension_wrap`, which serializes by file extension.
+
 # Examples
 
-## quick store
+The examples below run as doctests (`pytest tests/test_readme.py`).
+
+## a dict-like view of a folder
 
 ```pydocstring
->>> from py2store import QuickStore
+>>> import os, tempfile
+>>> from focal import Files, TextFiles
 >>>
->>> store = QuickStore()  # will print what (tmp) rootdir it is choosing
->>> # Write something and then read it out again
->>> store['foo'] = 'baz'
->>> 'foo' in store  # do you have the key 'foo' in your store?
+>>> rootdir = tempfile.mkdtemp()
+>>> store = Files(rootdir)  # keys are relative paths, values are bytes
+>>> store['foo'] = b'baz'
+>>> 'foo' in store
 True
->>> store['foo']  # what is the value for 'foo'?
+>>> store['foo']
+b'baz'
+>>> os.listdir(rootdir)  # it is a real file
+['foo']
+>>> texts = TextFiles(rootdir)  # same folder, values are str
+>>> texts['foo']
 'baz'
->>>
->>> # Okay, it behaves like a dict, but go have a look in your file system,  
->>> # and see that there is now a file in the rootdir, named 'foo'!
->>> 
->>> # Write something more complicated
->>> store['hello/world'] = [1, 'flew', {'over': 'a', "cuckoo's": map}]
->>> stored_val = store['hello/world']
->>> stored_val == [1, 'flew', {'over': 'a', "cuckoo's": map}]  # was it retrieved correctly?
-True
->>>
->>> # how many items do you have now?
->>> assert len(store) >= 2  # can't be sure there were no elements before, so can't assert == 2
->>> 
->>> # delete the stuff you've written
 >>> del store['foo']
->>> del store['hello/world']
+
 ```
 
-## iterate over files
+## bytes contents of a file, and key validation
 
 ```pydocstring
->>> import os
->>> filepath = __file__  # path to this module
->>> dirpath = os.path.dirname(__file__)  # path of the directory where I (the module file) am
->>> s = FileCollection(dirpath, max_levels=0)
+>>> import os, tempfile
+>>> from focal import Files
 >>>
->>> files_in_this_dir = list(s)
->>> filepath in files_in_this_dir
-True
-```
-
-## bytes contents of the file
-
-```pydocstring
->>> import os
->>> filepath = __file__
->>> dirpath = os.path.dirname(__file__)  # path of the directory where I (the module file) am
->>> s = FileBytesReader(dirpath, max_levels=0)
->>>
->>> ####### Get the first 9 characters (as bytes) of this module #####################
->>> s[filepath][:9]
-b'import os'
->>>
->>> ####### Test key validation #####################
->>> s['not_a_valid_key']  # this key is not valid since not under the dirpath folder
+>>> rootdir = tempfile.mkdtemp()
+>>> s = Files(rootdir)
+>>> s['hello.txt'] = b'import os'
+>>> s['hello.txt'][:6]
+b'import'
+>>> s['../escape']  # keys outside the root folder are refused
 Traceback (most recent call last):
     ...
-filesys.KeyValidationError: 'Key not valid (usually because does not exist or access not permitted): not_a_valid_key'
->>>
->>> ####### Test further exceptions (that should be wrapped in KeyError) #####################
->>> # this key is valid, since under dirpath, but the file itself doesn't exist (hopefully for this test)
->>> non_existing_file = os.path.join(dirpath, 'non_existing_file')
+dol.filesys.KeyValidationError: ...
 >>> try:
-...     s[non_existing_file]
+...     s['no_such_file']
 ... except KeyError:
 ...     print("KeyError (not FileNotFoundError) was raised.")
 KeyError (not FileNotFoundError) was raised.
+
 ```
+
+## serialize by extension
+
+See `focal.extension_store.multi_extension_wrap`.
 
 <p class="epythet-aggregates">This documentation as a single file: <a href="focal.md">focal.md</a> (Markdown, for agents).</p>
 
@@ -771,18 +753,18 @@ is equivalent to:
 
 # About this build
 
-This documentation was built on **2026-09-22 14:40 UTC** from commit <a href="https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2"><code>722de15</code></a> on branch <code>master</code>, for **focal 0.1.13** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 16:14 UTC** from commit <a href="https://github.com/i2mint/focal/commit/17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b"><code>17c62ea</code></a> on branch <code>master</code>, for **focal 0.1.14** (from <code>pyproject.toml</code>).
 
 #### WARNING
 The documentation and the package may be misaligned:
 
-- The documented version (0.1.13) is behind the latest release on PyPI (0.1.14): `pip install focal` gives newer code than these docs describe.
+- The documented version (0.1.14) is behind the latest release on PyPI (0.1.15): `pip install focal` gives newer code than these docs describe.
 
 ## Source
 
 |                     |                                                                                                                                                     |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2"><code>722de15b907f616208f6a5f28fa0c796e516e3c2</code></a> |
+| Commit              | <a href="https://github.com/i2mint/focal/commit/17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b"><code>17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b</code></a> |
 | Branch              | <code>master</code>                                                                                                                                 |
 | Tags at this commit | none                                                                                                                                                |
 | Working tree        | clean                                                                                                                                               |
@@ -793,18 +775,18 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/focal</code>                                                                  |
-| Run          | <a href="https://github.com/i2mint/focal/actions/runs/35740451345">35740451345</a>         |
+| Run          | <a href="https://github.com/i2mint/focal/actions/runs/38428779898">38428779898</a>         |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>722de15b907f616208f6a5f28fa0c796e516e3c2</code> (in the history of the built commit) |
+| Event commit | <code>17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b</code> (in the history of the built commit) |
 
 ## Tools
 
 |          |         |
 |----------|---------|
-| epythet  | 0.2.12  |
+| epythet  | 0.2.17  |
 | Sphinx   | 9.1.0   |
 | docutils | 0.22.4  |
-| Python   | 3.12.14 |
+| Python   | 3.12.15 |
 
 ## Configuration as resolved
 
@@ -820,14 +802,14 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/focal/0.1.14/">0.1.14</a>, newer than the documented version (0.1.13).
+Latest release: <a href="https://pypi.org/project/focal/0.1.15/">0.1.15</a>, newer than the documented version (0.1.14).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/focal && cd focal
-git checkout 722de15b907f616208f6a5f28fa0c796e516e3c2
-pip install "epythet==0.2.12"
+git checkout 17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b
+pip install "epythet==0.2.17"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 

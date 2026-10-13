@@ -5,19 +5,19 @@ orphan: true
 
 # About this build
 
-This documentation was built on **2026-09-22 14:40 UTC** from commit <a href="https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2"><code>722de15</code></a> on branch <code>master</code>, for **focal 0.1.13** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 16:14 UTC** from commit <a href="https://github.com/i2mint/focal/commit/17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b"><code>17c62ea</code></a> on branch <code>master</code>, for **focal 0.1.14** (from <code>pyproject.toml</code>).
 
 :::{warning}
 The documentation and the package may be misaligned:
 
-- The documented version (0.1.13) is behind the latest release on PyPI (0.1.14): `pip install focal` gives newer code than these docs describe.
+- The documented version (0.1.14) is behind the latest release on PyPI (0.1.15): `pip install focal` gives newer code than these docs describe.
 :::
 
 ## Source
 
 | | |
 |---|---|
-| Commit | <a href="https://github.com/i2mint/focal/commit/722de15b907f616208f6a5f28fa0c796e516e3c2"><code>722de15b907f616208f6a5f28fa0c796e516e3c2</code></a> |
+| Commit | <a href="https://github.com/i2mint/focal/commit/17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b"><code>17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b</code></a> |
 | Branch | <code>master</code> |
 | Tags at this commit | none |
 | Working tree | clean |
@@ -28,18 +28,18 @@ The documentation and the package may be misaligned:
 | | |
 |---|---|
 | Repository | <code>i2mint/focal</code> |
-| Run | <a href="https://github.com/i2mint/focal/actions/runs/35740451345">35740451345</a> |
+| Run | <a href="https://github.com/i2mint/focal/actions/runs/38428779898">38428779898</a> |
 | Ref | <code>refs/heads/master</code> |
-| Event commit | <code>722de15b907f616208f6a5f28fa0c796e516e3c2</code> (in the history of the built commit) |
+| Event commit | <code>17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b</code> (in the history of the built commit) |
 
 ## Tools
 
 | | |
 |---|---|
-| epythet | 0.2.12 |
+| epythet | 0.2.17 |
 | Sphinx | 9.1.0 |
 | docutils | 0.22.4 |
-| Python | 3.12.14 |
+| Python | 3.12.15 |
 
 ## Configuration as resolved
 
@@ -55,14 +55,14 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/focal/0.1.14/">0.1.14</a>, newer than the documented version (0.1.13).
+Latest release: <a href="https://pypi.org/project/focal/0.1.15/">0.1.15</a>, newer than the documented version (0.1.14).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/focal && cd focal
-git checkout 722de15b907f616208f6a5f28fa0c796e516e3c2
-pip install "epythet==0.2.12"
+git checkout 17c62ea95a18ed6ab2e9f8f6cbe18e35fb300b0b
+pip install "epythet==0.2.17"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 
