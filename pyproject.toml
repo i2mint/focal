@@ -31,7 +31,7 @@ classifiers = [
     "Topic :: System :: Filesystems",
 ]
 dependencies = [
-    "dol",
+    "dol>=0.3.71",
 ]
 
 [project.urls]
